@@ -5,6 +5,6 @@ resource "google_cloudbuild_trigger" "github-push-trigger" {
 
   trigger_template {
     branch_name = "master"
-    repo_name   = "github_matthewcylau_react-terraform-gcp-cloud-build"
+    repo_name   = var.cloud_source_repo_name
   }
 }

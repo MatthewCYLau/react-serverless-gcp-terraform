@@ -9,3 +9,7 @@ variable "credentials_filepath" {
 variable "bucket_name" {
   default = "www.react.matlau.co.uk"
 }
+
+variable "cloud_source_repo_name" {
+  default="github_matthewcylau_react-terraform-gcp-cloud-build"
+}
