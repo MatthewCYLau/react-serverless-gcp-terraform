@@ -1,6 +1,6 @@
-# React App on Google Cloud Storage
+# React Terraform GCP Cloud Build
 
-A reference project to deploy a static React app onto Google Cloud Storage with Terraform and Cloud Build
+A reference project to deploy a static React app onto Google Cloud Storage with Terraform, and [Cloud Build](https://cloud.google.com/cloud-build) as the CI/CD tool
 
 Referencing [this](https://cloud.google.com/storage/docs/hosting-static-website-http) GCP documentation
 

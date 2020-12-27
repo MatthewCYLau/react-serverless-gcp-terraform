@@ -11,5 +11,5 @@ variable "bucket_name" {
 }
 
 variable "cloud_source_repo_name" {
-  default="github_matthewcylau_react-terraform-gcp-cloud-build"
+  default = "github_matthewcylau_react-terraform-gcp-cloud-build"
 }
