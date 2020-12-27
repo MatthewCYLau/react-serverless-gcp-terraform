@@ -4,6 +4,8 @@ A reference project to deploy a static React app onto Google Cloud Storage with 
 
 Referencing [this](https://cloud.google.com/storage/docs/hosting-static-website-http) GCP documentation
 
+Terraform version used v0.14.3
+
 ## Pre-requisites
 
 - You own a domain via [Google Domains](https://domains.google/intl/en-GB/)
