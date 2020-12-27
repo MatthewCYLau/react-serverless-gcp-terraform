@@ -14,7 +14,7 @@ Referencing [this](https://cloud.google.com/storage/docs/hosting-static-website-
 terraform -help # prints Terraform options
 ```
 
-## Domain set-uo
+## Domain set-up
 
 - Connect your domain to Cloud Storage via a `CNAME` record. See Cloud Storage documentation [here](https://cloud.google.com/storage/docs/hosting-static-website-http#cname)
 - Add the GCP credentials JSON `client_email` as an owner of the domain. See Cloud Storage documentation [here](https://cloud.google.com/storage/docs/domain-name-verification#additional_verified_owners)
