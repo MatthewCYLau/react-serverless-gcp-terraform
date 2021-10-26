@@ -1,5 +1,5 @@
 variable "project" {
-  default = "gcp-terraform-299512"
+  default = "react-gke-terraform"
 }
 
 variable "credentials_filepath" {
@@ -7,7 +7,7 @@ variable "credentials_filepath" {
 }
 
 variable "bucket_name" {
-  default = "www.react.matlau.co.uk"
+  default = "www.matlau.co.uk"
 }
 
 variable "cloud_source_repo_name" {
