@@ -3,7 +3,7 @@ variable "project" {
 }
 
 variable "credentials_filepath" {
-  default = "/Users/matthewlau/gcp-creds/gcp-creds.json"
+  default = "/Users/matthewlau/gcp-creds/react-gke-terraform-sa-key.json"
 }
 
 variable "bucket_name" {
