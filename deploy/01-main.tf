@@ -7,6 +7,13 @@ terraform {
   }
 }
 
+terraform {
+  backend "gcs" {
+    bucket = "react-serverless-gcp-terraform-tf-state"
+    prefix = "terraform/state"
+  }
+}
+
 provider "google" {
 
   credentials = file(var.credentials_filepath)
