@@ -1,10 +1,8 @@
-# React Terraform GCP Cloud Build
+# GCP Serverless React App
 
-A reference project to deploy a static React app onto Google Cloud Storage with Terraform, and [Cloud Build](https://cloud.google.com/cloud-build) as the CI/CD tool
+A reference project to deploy a static React app onto Google Cloud Storage, [Cloud Build](https://cloud.google.com/cloud-build) as the CI/CD tool, and Cloud Functions as serverless back-end
 
 Referencing [this](https://cloud.google.com/storage/docs/hosting-static-website-http) GCP documentation
-
-Terraform version used v0.14.3
 
 ## Pre-requisites
 
