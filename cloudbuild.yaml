@@ -1,6 +1,6 @@
 steps:
   # Install dependencies
-  - name: node
+  - name: node:16.13.0
     entrypoint: yarn
     args: ["install"]
   # Run custom commands
