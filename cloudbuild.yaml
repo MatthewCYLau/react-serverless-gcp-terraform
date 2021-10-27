@@ -4,7 +4,7 @@ steps:
     entrypoint: yarn
     args: ["install"]
   # Run custom commands
-  - name: node
+  - name: node:16.13.0
     entrypoint: yarn
     args: ["run", "build"]
   - name: "gcr.io/cloud-builders/gsutil"
