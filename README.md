@@ -14,6 +14,10 @@ Referencing [this](https://cloud.google.com/storage/docs/hosting-static-website-
 terraform -help # prints Terraform options
 ```
 
+## Domain set-up
+
+- Add the GCP credentials JSON `client_email` as an owner of the domain. See Cloud Storage documentation [here](https://cloud.google.com/storage/docs/domain-name-verification#additional_verified_owners)
+
 ## Configurations
 
 - Populate the variables in terraform.tfvars`
