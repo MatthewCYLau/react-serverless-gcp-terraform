@@ -11,7 +11,7 @@ resource "google_compute_backend_bucket" "website" {
 resource "google_compute_managed_ssl_certificate" "website" {
   provider = google-beta
   name     = "website-cert"
-  project      = var.project
+  project  = var.project
   managed {
     domains = ["matlau.co.uk"]
   }

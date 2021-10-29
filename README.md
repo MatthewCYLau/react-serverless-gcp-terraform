@@ -14,34 +14,17 @@ Referencing [this](https://cloud.google.com/storage/docs/hosting-static-website-
 terraform -help # prints Terraform options
 ```
 
-## Domain set-up
-
-- Connect your domain to Cloud Storage via a `CNAME` record. See Cloud Storage documentation [here](https://cloud.google.com/storage/docs/hosting-static-website-http#cname)
-- Add the GCP credentials JSON `client_email` as an owner of the domain. See Cloud Storage documentation [here](https://cloud.google.com/storage/docs/domain-name-verification#additional_verified_owners)
-
 ## Configurations
 
-- Update the variables in `02-variables.tf`:
+- Populate the variables in terraform.tfvars`
 
 ```bash
-variable "project" {
-  default = <your_gcp_project_id>
-}
+project                = <GCP-PROJECT-ID>
+credentials_filepath   = <PATH-TO-GCP-SERVICE-ACCOUNT>
+bucket_name            = <STATIC-SITE-BUCKET-NAME>
+cloud_source_repo_name = <CLOUD-SOURCE-REPOSITORY-NAME>
 
-variable "credentials_filepath" {
-  default = <path_to_gcp_credentials_json>
-}
-
-variable "bucket_name" {
-  default = <your_gcp_cloud_storage_bucket_name>
-}
-
-variable "cloud_source_repo_name" {
-  default=<your_gcp_cloud_source_repo_name>
-}
 ```
-
-- Update the build command in `cloudbuild.yaml` with your bucket name i.e. `args: ["-m", "cp", "-r", "build/*", "gs://<your_gcp_cloud_storage_bucket_name>"]`
 
 ## Deploy
 
@@ -50,12 +33,6 @@ cd deploy # change to deploy directory
 terraform init # initialises Terraform
 terraform apply # deploys GCP stack
 terraform destroy # destroys GCP stack
-```
-
-- In project root directory, commit to `master` to trigger build:
-
-```bash
-git commit --allow-empty -m "Trigger pipeline"
 ```
 
 ## Contributing

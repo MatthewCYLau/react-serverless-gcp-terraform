@@ -7,4 +7,8 @@ resource "google_cloudbuild_trigger" "github-push-trigger" {
     branch_name = "master"
     repo_name   = var.cloud_source_repo_name
   }
+
+  substitutions = {
+    _BUCKET_NAME = var.bucket_name
+  }
 }

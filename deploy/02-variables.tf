@@ -1,15 +1,15 @@
 variable "project" {
-  default = "react-gke-terraform"
+  description = "GCP project ID"
 }
 
 variable "credentials_filepath" {
-  default = "/Users/matthewlau/gcp-creds/react-gke-terraform-sa-key.json"
+  description = "Local path to GCP service account key"
 }
 
 variable "bucket_name" {
-  default = "www.matlau.co.uk"
+  description = "Name of tatic site storage bucket"
 }
 
 variable "cloud_source_repo_name" {
-  default = "github_matthewcylau_react-serverless-gcp-terraform"
+  description = "GCP cloud source repository name"
 }

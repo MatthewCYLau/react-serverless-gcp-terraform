@@ -8,4 +8,4 @@ steps:
     entrypoint: yarn
     args: ["run", "build"]
   - name: "gcr.io/cloud-builders/gsutil"
-    args: ["-m", "cp", "-r", "build/*", "gs://www.matlau.co.uk"]
+    args: ["-m", "cp", "-r", "build/*", "gs://${_BUCKET_NAME}"]
