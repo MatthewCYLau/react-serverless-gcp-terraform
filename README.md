@@ -39,6 +39,10 @@ terraform apply # deploys GCP stack
 terraform destroy # destroys GCP stack
 ```
 
+## Domain configuration
+
+- Creat an A record and point it to the external static IP address. See reference GCP documentaion [here](https://cloud.google.com/storage/docs/hosting-static-website#connect-domain)
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
