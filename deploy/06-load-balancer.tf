@@ -18,7 +18,7 @@ resource "google_compute_managed_ssl_certificate" "web" {
   name     = "ssl-certificate"
   project  = var.project
   managed {
-    domains = ["matlau.co.uk"]
+    domains = ["matlau.co.uk", "www.matlau.co.uk"]
   }
 }
 
