@@ -35,11 +35,7 @@ const AppWithTheme = () => {
     [prefersDarkMode]
   );
 
-  return (
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
-  );
+  return <ThemeProvider theme={theme} children={<App />}></ThemeProvider>;
 };
 
 export default AppWithTheme;

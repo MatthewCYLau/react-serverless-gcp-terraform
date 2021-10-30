@@ -1,6 +1,6 @@
 {
   "name": "react-serverless-gcp-terraform",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "eslintConfig": {
     "extends": [
@@ -51,8 +51,8 @@
     "@types/jest": "^26.0.23",
     "@types/material-ui": "^0.21.8",
     "@types/node": "^15.0.2",
-    "@types/react": "^17.0.5",
-    "@types/react-dom": "^17.0.3",
+    "@types/react": "^17.0.33",
+    "@types/react-dom": "^17.0.10",
     "@types/react-router-dom": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.22.1",
     "@typescript-eslint/parser": "^4.22.1"
