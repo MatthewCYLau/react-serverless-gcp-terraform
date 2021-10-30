@@ -1,6 +1,6 @@
 resource "google_compute_project_default_network_tier" "default" {
   project = var.project
-  network_tier = "STANDARD"
+  network_tier = "PREMIUM"
 }
 
 # Add the bucket as a CDN backend
