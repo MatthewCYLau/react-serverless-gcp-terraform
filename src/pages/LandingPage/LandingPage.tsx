@@ -1,16 +1,7 @@
 import { RouteComponentProps } from "react-router-dom";
 import React from "react";
-import {
-  Container,
-  Grid,
-  Link,
-  Typography,
-  Button,
-  TextField,
-} from "@material-ui/core";
-import { useFormik } from "formik";
-import { useActions } from "../../hooks/useActions";
-import sampleImage from "../../assets/calculator.png";
+import { Container, Grid, Typography } from "@material-ui/core";
+import helloImage from "../../assets/hello.png";
 import useStyles from "./LandingPage.style";
 
 type Section = {
@@ -18,26 +9,8 @@ type Section = {
   html: React.ReactNode;
 };
 
-interface FormValues {
-  input: string;
-}
-
-const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
-  history,
-}) => {
+const LandingPage: React.FunctionComponent<RouteComponentProps> = () => {
   const styles = useStyles();
-  const { calculateIsEven } = useActions();
-
-  const initialValues: FormValues = { input: "" };
-
-  const formik = useFormik({
-    initialValues,
-    onSubmit: (values, actions) => {
-      calculateIsEven(values.input);
-      actions.setSubmitting(false);
-      history.push("/results");
-    },
-  });
 
   const sections: Section[] = [
     {
@@ -49,7 +22,7 @@ const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
   return (
     <Container component="main" maxWidth="lg" className={styles.root}>
       <div className={styles.content}>
-        <img className={styles.image} src={sampleImage} alt="Sample" />
+        <img className={styles.image} src={helloImage} alt="Hello" />
         <Grid container spacing={3}>
           {sections.map(({ html, key }) => (
             <Grid
