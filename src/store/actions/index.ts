@@ -1,27 +1,21 @@
 import { ActionType } from "../action-types";
 
-interface CalculateIsEvenAction {
-  type: ActionType.CALCULATE_ISEVEN;
-  payload: {
-    input: string;
-  };
+interface AuthRequestAction {
+  type: ActionType.AUTH_REQUEST;
+  payload: {};
 }
 
-interface CalculateIsEvenSuccessAction {
-  type: ActionType.CALCULATE_ISEVEN_SUCCESS;
-  payload: {
-    isEven: boolean;
-  };
+interface AuthRequestSuccessAction {
+  type: ActionType.AUTH_REQUEST_SUCCESS;
+  payload: {};
 }
 
-interface CalculateIsEvenErrorAction {
-  type: ActionType.CALCULATE_ISEVEN_ERROR;
-  payload: {
-    error: string;
-  };
+interface AuthRequestErrorAction {
+  type: ActionType.AUTH_REQUEST_ERROR;
+  payload: {};
 }
 
 export type Actions =
-  | CalculateIsEvenAction
-  | CalculateIsEvenSuccessAction
-  | CalculateIsEvenErrorAction;
+  | AuthRequestAction
+  | AuthRequestSuccessAction
+  | AuthRequestErrorAction;

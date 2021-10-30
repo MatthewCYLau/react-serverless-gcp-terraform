@@ -1,5 +1,5 @@
 export enum ActionType {
-  CALCULATE_ISEVEN = "calculate_iseven",
-  CALCULATE_ISEVEN_SUCCESS = "calculate_iseven_success",
-  CALCULATE_ISEVEN_ERROR = "calculate_iseven_error",
+  AUTH_REQUEST = "auth_request",
+  AUTH_REQUEST_SUCCESS = "auth_request_success",
+  AUTH_REQUEST_ERROR = "auth_request_error",
 }
