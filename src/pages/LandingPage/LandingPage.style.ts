@@ -51,5 +51,5 @@ export default makeStyles(
         },
       },
     }),
-  { name: "HomePage" }
+  { name: "LandingPage" }
 );

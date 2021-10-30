@@ -11,7 +11,7 @@ import {
 import { useFormik } from "formik";
 import { useActions } from "../../hooks/useActions";
 import sampleImage from "../../assets/calculator.png";
-import useStyles from "./HomePage.style";
+import useStyles from "./LandingPage.style";
 
 type Section = {
   key: string;
@@ -22,7 +22,7 @@ interface FormValues {
   input: string;
 }
 
-const HomePage: React.FunctionComponent<RouteComponentProps> = ({
+const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
   history,
 }) => {
   const styles = useStyles();
@@ -42,39 +42,7 @@ const HomePage: React.FunctionComponent<RouteComponentProps> = ({
   const sections: Section[] = [
     {
       key: "welcome",
-      html: (
-        <Typography>
-          {"Is-Even As A Service - because "}
-          <Link
-            color="secondary"
-            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Remainder"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Remainder operator
-          </Link>
-          {" is difficult to comprehend "}
-        </Typography>
-      ),
-    },
-    {
-      key: "form",
-      html: (
-        <form onSubmit={formik.handleSubmit}>
-          <TextField
-            fullWidth
-            id="input"
-            name="input"
-            label="Is this an even number?"
-            value={formik.values.input}
-            onChange={formik.handleChange}
-            className={styles.textField}
-          />
-          <Button color="primary" variant="contained" fullWidth type="submit">
-            Submit
-          </Button>
-        </form>
-      ),
+      html: <Typography>Landing Page</Typography>,
     },
   ];
 
@@ -101,4 +69,4 @@ const HomePage: React.FunctionComponent<RouteComponentProps> = ({
   );
 };
 
-export default HomePage;
+export default LandingPage;

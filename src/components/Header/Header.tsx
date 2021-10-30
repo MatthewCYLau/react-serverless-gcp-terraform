@@ -9,7 +9,7 @@ const Header: React.FunctionComponent = () => {
     <AppBar component="header" position="static">
       <Toolbar>
         <Typography variant="h6" component="h1" className={styles.title}>
-          Is-Even as a Service
+          GCP Serverless
         </Typography>
         <Button
           component={Link}
@@ -19,6 +19,15 @@ const Header: React.FunctionComponent = () => {
           to="/"
         >
           Home
+        </Button>
+        <Button
+          component={Link}
+          variant="contained"
+          color="primary"
+          disableElevation
+          to="/dashboard"
+        >
+          Dashboard
         </Button>
       </Toolbar>
     </AppBar>

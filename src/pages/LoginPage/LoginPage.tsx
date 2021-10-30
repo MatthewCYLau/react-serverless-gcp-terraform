@@ -5,13 +5,11 @@ import { useTypedSelector } from "../../hooks/useTypedSelector";
 import oddImage from "../../assets/one.png";
 import evenImage from "../../assets/two.png";
 import warningImage from "../../assets/warning.png";
-import useStyles from "./ResultsPage.style";
+import useStyles from "./LoginPage.style";
 
-const RoutingPage = () => {
+const LoginPage = () => {
   const styles = useStyles();
-  const { isEven, error, inputs } = useTypedSelector(
-    (state) => state.isEvenState
-  );
+  const { isEven, error } = useTypedSelector((state) => state.isEvenState);
 
   const returnImage = (isEven: boolean, error: string | null) => {
     if (error) {
@@ -49,20 +47,8 @@ const RoutingPage = () => {
         ) : (
           <div>
             <Typography variant="h4" component="h2" paragraph>
-              {inputs[inputs.length - 1]} is
+              Login
             </Typography>
-            <Typography component="p" paragraph>
-              {isEven ? "Even!" : "Odd!"}
-            </Typography>
-            <Button
-              component={Link}
-              variant="contained"
-              color="primary"
-              disableElevation
-              to="/"
-            >
-              Back
-            </Button>
           </div>
         )}
       </div>
@@ -70,4 +56,4 @@ const RoutingPage = () => {
   );
 };
 
-export default RoutingPage;
+export default LoginPage;

@@ -8,7 +8,6 @@ import useStyles from "./App.style";
 import createTheme from "../../config/Theme";
 import Routes from "../../config/Routes";
 import Header from "../Header";
-import HomePage from "../../pages/HomePage";
 
 const App = () => {
   const styles = useStyles();
@@ -19,7 +18,6 @@ const App = () => {
         <div className={styles.root}>
           <Header />
           <Switch>
-            <Route exact path="/" component={HomePage} />
             <Route component={Routes} />
           </Switch>
         </div>
