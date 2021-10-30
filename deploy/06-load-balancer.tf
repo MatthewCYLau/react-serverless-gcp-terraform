@@ -1,5 +1,5 @@
 resource "google_compute_project_default_network_tier" "default" {
-  project = var.project
+  project      = var.project
   network_tier = "PREMIUM"
 }
 
