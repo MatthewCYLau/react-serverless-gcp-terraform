@@ -1,5 +1,5 @@
 # Reserve an external IP
-resource "google_compute_global_address" "website" {
+resource "google_compute_global_address" "external_ip" {
   name         = "app-lb-ip"
   provider     = google
   address_type = "EXTERNAL"
@@ -8,7 +8,7 @@ resource "google_compute_global_address" "website" {
   description  = "External static IP address for React app"
 }
 
-output "website_ip" {
-  value       = google_compute_global_address.website.address
+output "external_ip" {
+  value       = google_compute_global_address.external_ip.address
   description = "External static IP address for React app"
 }

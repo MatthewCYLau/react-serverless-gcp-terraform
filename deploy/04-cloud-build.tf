@@ -1,4 +1,4 @@
-resource "google_cloudbuild_trigger" "github-push-trigger" {
+resource "google_cloudbuild_trigger" "github_push_trigger" {
 
   name     = "gcp-source-trigger"
   filename = "cloudbuild.yaml"
