@@ -3,7 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 
 type PrivateRouteProps = {
-  component: React.FunctionComponent<any>;
+  component: React.ComponentType<any>;
   exact: boolean;
   path: string;
 };
