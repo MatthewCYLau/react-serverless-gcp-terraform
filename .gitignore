@@ -30,3 +30,6 @@ yarn-error.log*
 # .tfstate files
 *.tfstate
 *.tfstate.*
+
+# Cloud functions
+*.zip
