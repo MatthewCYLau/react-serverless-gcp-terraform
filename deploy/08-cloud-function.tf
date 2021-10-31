@@ -5,7 +5,7 @@ resource "google_storage_bucket" "cloud_functions" {
 locals {
   google_storage_bucket_objects = {
     "get-todos-function.zip"   = { bucket = google_storage_bucket.cloud_functions.name, source = "cloud-functions/get-todos/get-todos-function.zip" },
-    "create-todo-function.zip" = { bucket = google_storage_bucket.cloud_functions.name, source = "cloud-functions/get-todos/create-todo-function.zip" },
+    "create-todo-function.zip" = { bucket = google_storage_bucket.cloud_functions.name, source = "cloud-functions/create-todo/create-todo-function.zip" },
   }
 }
 

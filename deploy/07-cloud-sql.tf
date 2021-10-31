@@ -1,5 +1,5 @@
 resource "google_sql_database_instance" "db_instance" {
-  name   = "react-serverless-gcp-database-instance"
+  name   = "react-serverless-gcp-db-instance"
   region = var.region
 
   settings {
@@ -11,6 +11,10 @@ resource "google_sql_database_instance" "db_instance" {
 
     ip_configuration {
       ipv4_enabled = true
+      authorized_networks {
+        name  = "public"
+        value = "0.0.0.0/0"
+      }
     }
 
   }
