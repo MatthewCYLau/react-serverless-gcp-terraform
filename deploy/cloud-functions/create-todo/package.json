@@ -1,0 +1,14 @@
+{
+  "name": "create-todo",
+  "private": true,
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "scripts": {
+    "start": "functions-framework --target=get"
+  },
+  "dependencies": {
+    "@google-cloud/bigtable": "^3.0.0",
+    "@google-cloud/functions-framework": "^1.5.1"
+  }
+}

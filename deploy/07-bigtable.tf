@@ -12,7 +12,7 @@ resource "google_bigtable_instance" "instance" {
   }
 
   lifecycle { prevent_destroy = false }
-  deletion_protection=false
+  deletion_protection = false
 }
 
 resource "google_bigtable_table" "table" {
@@ -22,5 +22,8 @@ resource "google_bigtable_table" "table" {
   lifecycle {
     prevent_destroy = false
   }
-  
+
+  column_family {
+    family = "stats_summary"
+  }
 }
