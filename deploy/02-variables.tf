@@ -15,7 +15,13 @@ variable "cloud_source_repo_name" {
 }
 
 variable "region" {
+  description = "GCP region"
 }
 
 variable "zone" {
+  description = "GCP zone"
+}
+
+variable "database_password_secret_name" {
+  description = "Cloud SQL PostgreSQL database password secret name"
 }

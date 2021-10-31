@@ -10,7 +10,7 @@ resource "google_sql_database_instance" "db_instance" {
     }
 
     ip_configuration {
-      ipv4_enabled    = true
+      ipv4_enabled = true
     }
 
   }
@@ -25,7 +25,7 @@ resource "google_sql_database" "db" {
 
 data "google_secret_manager_secret_version" "postgresql_database_password" {
   provider = google-beta
-  secret   = "postgresql-database-password"
+  secret   = var.database_password_secret_name
 }
 
 resource "google_sql_user" "postgresql_database_user" {
