@@ -13,3 +13,10 @@ variable "bucket_name" {
 variable "cloud_source_repo_name" {
   description = "GCP cloud source repository name"
 }
+
+variable "region" {
+}
+
+variable "zone" {
+  
+}

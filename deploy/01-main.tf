@@ -17,8 +17,16 @@ terraform {
 provider "google" {
 
   credentials = file(var.credentials_filepath)
+ region      = var.region
+  zone        = var.zone
+  project     = var.project
+}
 
-  project = var.project
-  region  = "europe-west2"
-  zone    = "europe-west2-a"
+provider "google-beta" {
+
+  credentials = file(var.credentials_filepath)
+  region      = var.region
+  zone        = var.zone
+  project     = var.project
+
 }
