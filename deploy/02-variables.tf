@@ -18,5 +18,4 @@ variable "region" {
 }
 
 variable "zone" {
-  
 }
