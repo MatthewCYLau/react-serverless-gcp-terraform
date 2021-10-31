@@ -2,16 +2,18 @@ resource "google_storage_bucket" "cloud_functions" {
   name = "react-serverless-cloud-functions-bucket"
 }
 
-resource "google_storage_bucket_object" "get_todos_function" {
-  name   = "get-todos-function.zip"
-  bucket = google_storage_bucket.cloud_functions.name
-  source = "cloud-functions/get-todos/get-todos-function.zip"
+locals {
+  google_storage_bucket_objects = {
+    "get-todos-function.zip"   = { bucket = google_storage_bucket.cloud_functions.name, source = "cloud-functions/get-todos/get-todos-function.zip" },
+    "create-todo-function.zip" = { bucket = google_storage_bucket.cloud_functions.name, source = "cloud-functions/get-todos/create-todo-function.zip" },
+  }
 }
 
-resource "google_storage_bucket_object" "create_todo_function" {
-  name   = "create-todo-function.zip"
-  bucket = google_storage_bucket.cloud_functions.name
-  source = "cloud-functions/create-todo/create-todo-function.zip"
+resource "google_storage_bucket_object" "function_map" {
+  for_each = local.google_storage_bucket_objects
+  name     = each.key
+  bucket   = each.value.bucket
+  source   = each.value.source
 }
 
 resource "google_cloudfunctions_function" "get_todos" {
@@ -22,7 +24,7 @@ resource "google_cloudfunctions_function" "get_todos" {
 
   available_memory_mb   = 128
   source_archive_bucket = google_storage_bucket.cloud_functions.name
-  source_archive_object = google_storage_bucket_object.get_todos_function.name
+  source_archive_object = google_storage_bucket_object.function_map["get-todos-function.zip"].name
   trigger_http          = true
   timeout               = 60
   entry_point           = "readRows"
@@ -36,7 +38,7 @@ resource "google_cloudfunctions_function" "create_todo" {
 
   available_memory_mb   = 128
   source_archive_bucket = google_storage_bucket.cloud_functions.name
-  source_archive_object = google_storage_bucket_object.create_todo_function.name
+  source_archive_object = google_storage_bucket_object.function_map["create-todo-function.zip"].name
   trigger_http          = true
   timeout               = 60
   entry_point           = "writeRow"
