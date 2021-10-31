@@ -20,7 +20,7 @@ terraform -help # prints Terraform options
 
 ## Configurations
 
-- Populate the variables in terraform.tfvars`
+- Populate the variables in `terraform.tfvars`
 
 ```bash
 project                = <GCP-PROJECT-ID>
