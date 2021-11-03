@@ -7,6 +7,7 @@ resource "google_storage_bucket" "static_site" {
   website {
     main_page_suffix = "index.html"
   }
+  labels = local.tags
 }
 
 resource "google_storage_default_object_access_control" "web_read" {
