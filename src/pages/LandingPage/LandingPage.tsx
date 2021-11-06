@@ -17,7 +17,7 @@ const LandingPage: React.FunctionComponent<RouteComponentProps> = () => {
       key: "welcome",
       html: (
         <Typography variant="h4" component="h2" paragraph>
-          Welcome to GCP Serverless To-Do App!
+          GCP Serverless To-Do App
         </Typography>
       ),
     },
