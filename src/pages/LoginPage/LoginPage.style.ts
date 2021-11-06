@@ -36,6 +36,11 @@ export default makeStyles(
         borderRadius: 4,
         padding: spacing(0.5, 0.75),
       },
+      textField: {
+        "& .MuiFormLabel-root": {
+          color: palette.text.primary,
+        },
+      },
     }),
   { name: "LoginPage" }
 );

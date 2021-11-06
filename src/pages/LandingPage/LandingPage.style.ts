@@ -50,6 +50,10 @@ export default makeStyles(
           color: palette.text.primary,
         },
       },
+      button: {
+        marginRight: "5px",
+        marginLeft: "5px",
+      },
     }),
   { name: "LandingPage" }
 );

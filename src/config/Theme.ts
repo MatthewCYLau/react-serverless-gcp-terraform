@@ -1,8 +1,9 @@
 import createPalette from "@material-ui/core/styles/createPalette";
 import createTheme from "@material-ui/core/styles/createTheme";
 import responsiveFontSizes from "@material-ui/core/styles/responsiveFontSizes";
+import { PaletteType } from "@material-ui/core";
 
-const Theme = (darkMode: boolean) => {
+const Theme = (mode: string) => {
   const palette = createPalette({
     primary: {
       main: "#FF7E39",
@@ -16,7 +17,7 @@ const Theme = (darkMode: boolean) => {
     text: {
       secondary: "rgba(0, 0, 0, 0.56)",
     },
-    type: darkMode ? "dark" : "light",
+    type: mode as PaletteType,
   });
 
   const theme = createTheme({ palette });

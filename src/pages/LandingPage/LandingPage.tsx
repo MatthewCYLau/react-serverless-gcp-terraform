@@ -1,6 +1,6 @@
-import { RouteComponentProps } from "react-router-dom";
+import { RouteComponentProps, Link } from "react-router-dom";
 import React from "react";
-import { Container, Grid, Typography } from "@material-ui/core";
+import { Container, Grid, Typography, Button } from "@material-ui/core";
 import helloImage from "../../assets/hello.png";
 import useStyles from "./LandingPage.style";
 
@@ -15,7 +15,38 @@ const LandingPage: React.FunctionComponent<RouteComponentProps> = () => {
   const sections: Section[] = [
     {
       key: "welcome",
-      html: <Typography>Landing Page</Typography>,
+      html: (
+        <Typography variant="h4" component="h2" paragraph>
+          Welcome to GCP Serverless To-Do App!
+        </Typography>
+      ),
+    },
+    {
+      key: "login",
+      html: (
+        <Container>
+          <Button
+            component={Link}
+            variant="contained"
+            color="primary"
+            disableElevation
+            to="/login"
+            className={styles.button}
+          >
+            Login
+          </Button>
+          <Button
+            component={Link}
+            variant="contained"
+            color="secondary"
+            disableElevation
+            to="/register"
+            className={styles.button}
+          >
+            Register
+          </Button>
+        </Container>
+      ),
     },
   ];
 
