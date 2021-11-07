@@ -45,6 +45,15 @@ terraform destroy # destroys GCP stack
 
 - Creat an A record and point it to the external static IP address. See reference GCP documentaion [here](https://cloud.google.com/storage/docs/hosting-static-website#connect-domain)
 
+## Cloud SQL migrations
+
+- Connect to Cloud SQL, and run `migrations.sql` to create database tables:
+
+```bash
+cd deploy/db-migrations
+psql postgresql://postgresql-database-user:<DB-PASSWORD>@<CLOUD-SQL-IP>:5432/react-serverless-gcp-database -f migrations.sql
+```
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
