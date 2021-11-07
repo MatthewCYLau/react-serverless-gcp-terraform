@@ -1,9 +1,8 @@
 import React from "react";
-import { RouteComponentProps, Redirect } from "react-router-dom";
+import { RouteComponentProps } from "react-router-dom";
 import { Container, Typography, TextField, Button } from "@material-ui/core";
 import { useFormik } from "formik";
 import { useActions } from "../../hooks/useActions";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
 import registrationImage from "../../assets/register.png";
 import useStyles from "./RegistrationPage.style";
 
@@ -16,15 +15,14 @@ const RegistrationPage: React.FunctionComponent<RouteComponentProps> = ({
   history,
 }) => {
   const styles = useStyles();
-  const { loginSuccess } = useActions();
-  const { isAuthenticated } = useTypedSelector((state) => state.authState);
+  const { login } = useActions();
 
   const initialValues: RegistrationFormValues = { username: "", password: "" };
 
   const formik = useFormik({
     initialValues,
     onSubmit: (values, actions) => {
-      loginSuccess();
+      login();
       actions.setSubmitting(false);
       history.push("/dashboard");
     },

@@ -12,11 +12,9 @@ interface LoginFormValues {
   password: string;
 }
 
-const LoginPage: React.FunctionComponent<RouteComponentProps> = ({
-  history,
-}) => {
+const LoginPage: React.FunctionComponent<RouteComponentProps> = () => {
   const styles = useStyles();
-  const { loginSuccess } = useActions();
+  const { login } = useActions();
   const { isAuthenticated } = useTypedSelector((state) => state.authState);
 
   const initialValues: LoginFormValues = { username: "", password: "" };
@@ -24,9 +22,8 @@ const LoginPage: React.FunctionComponent<RouteComponentProps> = ({
   const formik = useFormik({
     initialValues,
     onSubmit: (values, actions) => {
-      loginSuccess();
+      login();
       actions.setSubmitting(false);
-      history.push("/dashboard");
     },
   });
 
