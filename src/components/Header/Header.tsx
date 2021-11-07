@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { AppBar, Button, Toolbar, Typography } from "@material-ui/core";
-import IconButton from "@mui/material/IconButton";
+import {
+  AppBar,
+  Button,
+  Toolbar,
+  Typography,
+  IconButton,
+} from "@material-ui/core";
 import useStyles from "./Header.style";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
@@ -34,11 +39,7 @@ const Header: React.FunctionComponent = () => {
         >
           Dashboard
         </Button>
-        <IconButton
-          sx={{ ml: 1 }}
-          onClick={context.toggleColorMode}
-          color="inherit"
-        >
+        <IconButton onClick={context.toggleColorMode} color="inherit">
           {context.mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
         </IconButton>
       </Toolbar>
