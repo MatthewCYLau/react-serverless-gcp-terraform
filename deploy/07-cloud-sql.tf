@@ -1,5 +1,5 @@
 resource "google_sql_database_instance" "db_instance" {
-  name   = "react-serverless-gcp-db-instance"
+  name   = "${var.project_name}-db-001"
   region = var.region
 
   settings {

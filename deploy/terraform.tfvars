@@ -1,5 +1,5 @@
 project                       = "react-gke-terraform"
-project_name                  = "react-gke-terraform"
+project_name                  = "react-serverless-gcp"
 credentials_filepath          = "/Users/matthewlau/gcp-creds/react-gke-terraform-sa-key.json"
 bucket_name                   = "www.matlau.co.uk"
 cloud_source_repo_name        = "github_matthewcylau_react-serverless-gcp-terraform"
