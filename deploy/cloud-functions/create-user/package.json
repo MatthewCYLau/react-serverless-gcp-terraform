@@ -1,0 +1,14 @@
+{
+  "name": "create-user",
+  "private": true,
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "scripts": {
+    "start": "functions-framework --target=get"
+  },
+  "dependencies": {
+    "knex": "0.95.13",
+    "pg": "8.7.1"
+  }
+}
