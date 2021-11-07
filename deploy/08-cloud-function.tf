@@ -1,17 +1,21 @@
 resource "google_storage_bucket" "cloud_functions" {
-  name = "react-serverless-cloud-functions-bucket"
+  name          = "react-serverless-cloud-functions-bucket"
+  force_destroy = true
+  location      = "EUROPE-WEST2"
+  storage_class = "STANDARD"
+  labels        = local.tags
 }
 
 locals {
-  google_storage_bucket_objects = {
-    "get-todos-function.zip"   = { bucket = google_storage_bucket.cloud_functions.name, source = "cloud-functions/get-todos/get-todos-function.zip" },
-    "create-todo-function.zip" = { bucket = google_storage_bucket.cloud_functions.name, source = "cloud-functions/create-todo/create-todo-function.zip" },
-    "create-user-function.zip" = { bucket = google_storage_bucket.cloud_functions.name, source = "cloud-functions/create-user/create-user-function.zip" },
+  cloud_functions = {
+    "get-todos"   = { bucket = google_storage_bucket.cloud_functions.name, source = "cloud-functions/get-todos/get-todos-function.zip" },
+    "create-todo" = { bucket = google_storage_bucket.cloud_functions.name, source = "cloud-functions/create-todo/create-todo-function.zip" },
+    "create-user" = { bucket = google_storage_bucket.cloud_functions.name, source = "cloud-functions/create-user/create-user-function.zip" },
   }
 }
 
-resource "google_storage_bucket_object" "function_map" {
-  for_each = local.google_storage_bucket_objects
+resource "google_storage_bucket_object" "cloud_functions" {
+  for_each = local.cloud_functions
   name     = each.key
   bucket   = each.value.bucket
   source   = each.value.source
@@ -25,7 +29,7 @@ resource "google_cloudfunctions_function" "get_todos" {
 
   available_memory_mb   = 128
   source_archive_bucket = google_storage_bucket.cloud_functions.name
-  source_archive_object = google_storage_bucket_object.function_map["get-todos-function.zip"].name
+  source_archive_object = google_storage_bucket_object.cloud_functions["get-todos"].name
   trigger_http          = true
   timeout               = 60
   entry_point           = "readRows"
@@ -39,7 +43,7 @@ resource "google_cloudfunctions_function" "create_todo" {
 
   available_memory_mb   = 128
   source_archive_bucket = google_storage_bucket.cloud_functions.name
-  source_archive_object = google_storage_bucket_object.function_map["create-todo-function.zip"].name
+  source_archive_object = google_storage_bucket_object.cloud_functions["create-todo"].name
   trigger_http          = true
   timeout               = 60
   entry_point           = "writeRow"
@@ -53,7 +57,7 @@ resource "google_cloudfunctions_function" "create_user" {
 
   available_memory_mb   = 128
   source_archive_bucket = google_storage_bucket.cloud_functions.name
-  source_archive_object = google_storage_bucket_object.function_map["create-user-function.zip"].name
+  source_archive_object = google_storage_bucket_object.cloud_functions["create-user"].name
   trigger_http          = true
   timeout               = 60
   entry_point           = "createUser"

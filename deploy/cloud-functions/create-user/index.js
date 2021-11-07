@@ -84,19 +84,25 @@ exports.getUsers = async (req, res) => {
 };
 
 exports.createUser = async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+
+  if (req.method === "OPTIONS") {
+    res.set("Access-Control-Allow-Methods", "GET");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+    res.set("Access-Control-Max-Age", "3600");
+    res.status(204).send("");
+  }
   pool = pool || (await createPoolAndEnsureSchema());
-  // Get the team from the request and record the time of the vote.
   const timestamp = new Date();
   const user = {
     password: "foobar",
-    time_cast: timestamp,
+    time_created: timestamp,
   };
 
-  // Save the data to the database.
   try {
     await insertUserToDatabase(pool, user);
   } catch (err) {
-    console.log("Unable to insert user to database");
+    console.log(err);
     res.status(500).send("Unable to create user").end();
     return;
   }
