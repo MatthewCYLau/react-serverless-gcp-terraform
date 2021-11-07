@@ -16,6 +16,7 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/styles": "^4.11.4",
     "@mui/icons-material": "^5.0.5",
+    "@mui/material": "^5.0.6",
     "axios": "^0.23.0",
     "formik": "^2.2.9",
     "react": "^17.0.1",
