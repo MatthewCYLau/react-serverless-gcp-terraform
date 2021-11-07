@@ -40,7 +40,7 @@ const LandingPage: React.FunctionComponent<RouteComponentProps> = () => {
             variant="contained"
             color="secondary"
             disableElevation
-            to="/register"
+            to="/registration"
             className={styles.button}
           >
             Register
