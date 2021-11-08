@@ -6,6 +6,15 @@ resource "google_storage_bucket" "cloud_functions" {
   labels        = local.tags
 }
 
+module "cloud-function" {
+  source      = "./modules/cloud-function"
+  source_dir  = "./cloud-functions/create-user"
+  name        = "create-user"
+  entry_point = "createUser"
+  google_storage_bucket_name = google_storage_bucket.cloud_functions.name
+}
+
+/*
 locals {
   cloud_functions = {
     "get-todos"   = { bucket = google_storage_bucket.cloud_functions.name, source = "cloud-functions/get-todos/get-todos-function.zip" },
@@ -91,3 +100,4 @@ resource "google_cloudfunctions_function_iam_member" "invoke_create_users" {
   role   = "roles/cloudfunctions.invoker"
   member = "allUsers"
 }
+*/
