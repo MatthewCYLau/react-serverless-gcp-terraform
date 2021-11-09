@@ -7,11 +7,17 @@ resource "google_storage_bucket" "cloud_functions" {
 }
 
 module "cloud-function" {
-  source      = "./modules/cloud-function"
-  source_dir  = "./cloud-functions/create-user"
-  name        = "create-user"
-  entry_point = "createUser"
+  source                     = "./modules/cloud-function"
+  source_dir                 = "./cloud-functions/create-user"
+  name                       = "create-user"
+  entry_point                = "createUser"
   google_storage_bucket_name = google_storage_bucket.cloud_functions.name
+  environment_variables = {
+    DB_HOST = "${google_sql_database_instance.db_instance.public_ip_address}:5432"
+    DB_USER = google_sql_user.postgresql_database_user.name
+    DB_PASS = google_sql_user.postgresql_database_user.password
+    DB_NAME = google_sql_database.db.name
+  }
 }
 
 /*
