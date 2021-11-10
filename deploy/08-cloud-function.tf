@@ -6,18 +6,29 @@ resource "google_storage_bucket" "cloud_functions" {
   labels        = local.tags
 }
 
-module "cloud-function" {
-  source                     = "./modules/cloud-function"
-  source_dir                 = "./cloud-functions/create-user"
-  name                       = "create-user"
-  entry_point                = "createUser"
-  google_storage_bucket_name = google_storage_bucket.cloud_functions.name
-  environment_variables = {
-    DB_HOST = "${google_sql_database_instance.db_instance.public_ip_address}:5432"
-    DB_USER = google_sql_user.postgresql_database_user.name
-    DB_PASS = google_sql_user.postgresql_database_user.password
-    DB_NAME = google_sql_database.db.name
+locals {
+  cloud_functions = {
+    "users" = { source_dir = "./functions/users", entry_point = "createUser", environment_variables = {
+      DB_HOST = "${google_sql_database_instance.db_instance.public_ip_address}:5432"
+      DB_USER = google_sql_user.postgresql_database_user.name
+      DB_PASS = google_sql_user.postgresql_database_user.password
+      DB_NAME = google_sql_database.db.name
+    } },
   }
+}
+
+module "cloud-function" {
+  for_each                   = local.cloud_functions
+  source                     = "./modules/cloud-function"
+  source_dir                 = each.value.source_dir
+  name                       = each.key
+  entry_point                = each.value.entry_point
+  google_storage_bucket_name = google_storage_bucket.cloud_functions.name
+  environment_variables      = each.value.environment_variables
+}
+
+output "cloud_functions_trigger_urls" {
+  value = module.cloud-function
 }
 
 /*
