@@ -1,8 +1,19 @@
 "use strict";
 
+const express = require("express");
 const Knex = require("knex");
+const app = express();
 
-let pool;
+app.use(express.json());
+
+// Create a Winston logger that streams to Stackdriver Logging.
+const winston = require("winston");
+const { LoggingWinston } = require("@google-cloud/logging-winston");
+const loggingWinston = new LoggingWinston();
+const logger = winston.createLogger({
+  level: "info",
+  transports: [new winston.transports.Console(), loggingWinston],
+});
 
 const createTcpPool = async (config) => {
   // Extract host and port from socket address
@@ -63,6 +74,21 @@ const insertUserToDatabase = async (pool, user) => {
   }
 };
 
+let pool;
+
+app.use(async (req, res, next) => {
+  if (pool) {
+    return next();
+  }
+  try {
+    pool = await createPoolAndEnsureSchema();
+    next();
+  } catch (err) {
+    logger.error(err);
+    return next(err);
+  }
+});
+
 const getUsersFromDatabase = async (pool) => {
   return await pool
     .select("password", "time_created")
@@ -71,19 +97,7 @@ const getUsersFromDatabase = async (pool) => {
     .limit(5);
 };
 
-exports.getUsers = async (req, res) => {
-  pool = pool || (await createPoolAndEnsureSchema());
-  try {
-    const users = await getUsersFromDatabase(pool);
-
-    res.status(200).send(users).end();
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Unable to get users").end();
-  }
-};
-
-exports.createUser = async (req, res) => {
+app.post("/users", async (req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
 
   if (req.method === "OPTIONS") {
@@ -107,4 +121,22 @@ exports.createUser = async (req, res) => {
     return;
   }
   res.status(200).send("User created").end();
+});
+
+app.get("/ping", (req, res) => {
+  res.status(200).send("pong!");
+});
+
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`App listening on port ${PORT}`);
+});
+
+process.on("unhandledRejection", (err) => {
+  console.error(err);
+  throw err;
+});
+
+module.exports = {
+  app,
 };
