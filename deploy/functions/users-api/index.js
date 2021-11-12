@@ -6,15 +6,6 @@ const app = express();
 
 app.use(express.json());
 
-// Create a Winston logger that streams to Stackdriver Logging.
-const winston = require("winston");
-const { LoggingWinston } = require("@google-cloud/logging-winston");
-const loggingWinston = new LoggingWinston();
-const logger = winston.createLogger({
-  level: "info",
-  transports: [new winston.transports.Console(), loggingWinston],
-});
-
 const createTcpPool = async (config) => {
   // Extract host and port from socket address
   const dbSocketAddr = process.env.DB_HOST.split(":"); // e.g. '127.0.0.1:5432'
@@ -49,8 +40,9 @@ const ensureSchema = async (pool) => {
   if (!hasTable) {
     return pool.schema.createTable("users", (table) => {
       table.increments("user_id").primary();
-      table.timestamp("time_created", 30).notNullable();
+      table.specificType("username", "VARCHAR(100)").notNullable();
       table.specificType("password", "VARCHAR(100)").notNullable();
+      table.timestamp("time_created", 30).notNullable();
     });
   }
 };
@@ -66,17 +58,9 @@ const createPoolAndEnsureSchema = async () =>
       throw err;
     });
 
-const insertUserToDatabase = async (pool, user) => {
-  try {
-    return await pool("users").insert(user);
-  } catch (err) {
-    throw Error(err);
-  }
-};
-
 let pool;
 
-app.use(async (req, res, next) => {
+app.use(async (_req, _res, next) => {
   if (pool) {
     return next();
   }
@@ -84,17 +68,24 @@ app.use(async (req, res, next) => {
     pool = await createPoolAndEnsureSchema();
     next();
   } catch (err) {
-    logger.error(err);
+    console.log(err);
     return next(err);
   }
 });
 
 const getUsersFromDatabase = async (pool) => {
   return await pool
-    .select("password", "time_created")
+    .select("user_id", "username", "time_created")
     .from("users")
-    .orderBy("time_created", "desc")
-    .limit(5);
+    .orderBy("time_created", "desc");
+};
+
+const insertUserToDatabase = async (pool, user) => {
+  try {
+    return await pool("users").insert(user);
+  } catch (err) {
+    throw Error(err);
+  }
 };
 
 app.post("/users", async (req, res) => {
@@ -109,7 +100,8 @@ app.post("/users", async (req, res) => {
   pool = pool || (await createPoolAndEnsureSchema());
   const timestamp = new Date();
   const user = {
-    password: "foobar",
+    username: "foo",
+    password: "bar",
     time_created: timestamp,
   };
 
@@ -123,7 +115,27 @@ app.post("/users", async (req, res) => {
   res.status(200).send("User created").end();
 });
 
-app.get("/ping", (req, res) => {
+app.get("/users", async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+
+  if (req.method === "OPTIONS") {
+    res.set("Access-Control-Allow-Methods", "GET");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+    res.set("Access-Control-Max-Age", "3600");
+    res.status(204).send("");
+  }
+  pool = pool || (await createPoolAndEnsureSchema());
+
+  try {
+    const users = await getUsersFromDatabase(pool);
+    return res.status(200).send(users);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send("Unable to create user");
+  }
+});
+
+app.get("/ping", (_req, res) => {
   res.status(200).send("pong!");
 });
 
@@ -133,7 +145,7 @@ app.listen(PORT, () => {
 });
 
 process.on("unhandledRejection", (err) => {
-  console.error(err);
+  console.log(err);
   throw err;
 });
 
