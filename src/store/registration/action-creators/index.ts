@@ -19,7 +19,7 @@ export const register = (registrationBody: RegistrationBody) => {
     });
     try {
       const { username, password } = registrationBody;
-      await axios.post(`${API_BASE_URL}/users-api/users`, {
+      await axios.post(`${API_BASE_URL}/users`, {
         username,
         password,
       });
