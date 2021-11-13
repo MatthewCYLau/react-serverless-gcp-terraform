@@ -44,7 +44,7 @@ router.post("/", async (req, res) => {
     res.status(500).send("Unable to create user").end();
     return;
   }
-  res.status(200).send("User created").end();
+  res.status(200).send("User created");
 });
 
 router.get("/", async (req, res) => {

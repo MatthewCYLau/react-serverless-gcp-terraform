@@ -22,7 +22,7 @@ const RegistrationPage: React.FunctionComponent<RouteComponentProps> = ({
   const formik = useFormik({
     initialValues,
     onSubmit: (values, actions) => {
-      register();
+      register(values);
       actions.setSubmitting(false);
       history.push("/dashboard");
     },

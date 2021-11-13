@@ -3,17 +3,26 @@ import { Dispatch } from "redux";
 import { ActionType } from "../action-types";
 import { Actions } from "../actions";
 
-export const register = () => {
+interface RegistrationBody {
+  username: string;
+  password: string;
+}
+
+export const register = (registrationBody: RegistrationBody) => {
   return async (dispatch: Dispatch<Actions>) => {
     dispatch({
       type: ActionType.REGISTRATION_REQUEST,
       payload: {},
     });
     try {
-      const { data } = await axios.get(
-        `https://europe-west2-react-gke-terraform.cloudfunctions.net/users-api/users`
+      const { username, password } = registrationBody;
+      await axios.post(
+        `https://europe-west2-react-gke-terraform.cloudfunctions.net/users-api/users`,
+        {
+          username,
+          password,
+        }
       );
-      console.log(data);
       dispatch({
         type: ActionType.REGISTRATION_REQUEST_SUCCESS,
         payload: {},
