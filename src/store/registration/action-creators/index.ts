@@ -1,7 +1,10 @@
 import axios from "axios";
 import { Dispatch } from "redux";
-import { ActionType } from "../action-types";
-import { Actions } from "../actions";
+import { ActionType as RegistrationActionType } from "../action-types";
+import { ActionType as AuthActionType } from "../../auth/action-types";
+import { Actions as RegistrationAction } from "../actions";
+import { Actions as AuthActions } from "../../auth/actions";
+import { API_BASE_URL } from "../../../constants";
 
 interface RegistrationBody {
   username: string;
@@ -9,27 +12,24 @@ interface RegistrationBody {
 }
 
 export const register = (registrationBody: RegistrationBody) => {
-  return async (dispatch: Dispatch<Actions>) => {
+  return async (dispatch: Dispatch<RegistrationAction | AuthActions>) => {
     dispatch({
-      type: ActionType.REGISTRATION_REQUEST,
+      type: RegistrationActionType.REGISTRATION_REQUEST,
       payload: {},
     });
     try {
       const { username, password } = registrationBody;
-      await axios.post(
-        `https://europe-west2-react-gke-terraform.cloudfunctions.net/users-api/users`,
-        {
-          username,
-          password,
-        }
-      );
+      await axios.post(`${API_BASE_URL}/users-api/users`, {
+        username,
+        password,
+      });
       dispatch({
-        type: ActionType.REGISTRATION_REQUEST_SUCCESS,
+        type: AuthActionType.AUTH_REQUEST_SUCCESS,
         payload: {},
       });
     } catch (err) {
       dispatch({
-        type: ActionType.REGISTRATION_REQUEST_ERROR,
+        type: RegistrationActionType.REGISTRATION_REQUEST_ERROR,
         payload: {},
       });
     }
