@@ -1,14 +1,19 @@
 import { Actions } from "../actions";
 import { ActionType } from "../action-types";
+import { User } from "../interface";
 
 interface AuthState {
+  token: string | null;
   isAuthenticated: boolean;
   loading: boolean;
+  user: User | null;
 }
 
 const initialState = {
+  token: localStorage.getItem("token"),
   isAuthenticated: false,
-  loading: false,
+  loading: true,
+  user: null,
 };
 
 const reducer = (
@@ -16,20 +21,33 @@ const reducer = (
   action: Actions
 ): AuthState => {
   switch (action.type) {
-    case ActionType.AUTH_REQUEST:
+    case ActionType.USER_LOADED:
       return {
         ...state,
-        loading: true,
-      };
-    case ActionType.AUTH_REQUEST_SUCCESS:
-      return {
-        loading: false,
         isAuthenticated: true,
-      };
-    case ActionType.AUTH_REQUEST_ERROR:
-      return {
         loading: false,
+        user: action.payload,
+      };
+
+    case ActionType.REGISTRATION_SUCCESS:
+    case ActionType.LOGIN_SUCCESS:
+      localStorage.setItem("token", "foo-bar");
+      return {
+        ...state,
+        ...action.payload,
+        isAuthenticated: true,
+        loading: false,
+      };
+    case ActionType.REGISTRATION_FAILED:
+    case ActionType.AUTH_ERROR:
+    case ActionType.LOGIN_FAILED:
+    case ActionType.LOGOUT:
+      localStorage.removeItem("token");
+      return {
+        ...state,
+        token: null,
         isAuthenticated: false,
+        loading: false,
       };
     default:
       return state;

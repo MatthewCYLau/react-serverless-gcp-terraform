@@ -1,21 +1,45 @@
 import { ActionType } from "../action-types";
+import { User } from "../interface";
 
-interface AuthRequestAction {
-  type: ActionType.AUTH_REQUEST;
+interface UserLoadedAction {
+  type: ActionType.USER_LOADED;
+  payload: User;
+}
+interface AuthErrorAction {
+  type: ActionType.AUTH_ERROR;
   payload: {};
 }
 
-interface AuthRequestSuccessAction {
-  type: ActionType.AUTH_REQUEST_SUCCESS;
+interface RegistrationSuccessAction {
+  type: ActionType.REGISTRATION_SUCCESS;
   payload: {};
 }
 
-interface AuthRequestErrorAction {
-  type: ActionType.AUTH_REQUEST_ERROR;
+interface RegistrationFailedAction {
+  type: ActionType.REGISTRATION_FAILED;
+  payload: {};
+}
+
+interface LoginSuccessAction {
+  type: ActionType.LOGIN_SUCCESS;
+  payload: {};
+}
+
+interface LoginFailedAction {
+  type: ActionType.LOGIN_FAILED;
+  payload: {};
+}
+
+interface LogoutAction {
+  type: ActionType.LOGOUT;
   payload: {};
 }
 
 export type Actions =
-  | AuthRequestAction
-  | AuthRequestSuccessAction
-  | AuthRequestErrorAction;
+  | UserLoadedAction
+  | AuthErrorAction
+  | RegistrationSuccessAction
+  | RegistrationFailedAction
+  | LoginSuccessAction
+  | LoginFailedAction
+  | LogoutAction;

@@ -12,9 +12,7 @@ interface RegistrationFormValues {
   password: string;
 }
 
-const RegistrationPage: React.FunctionComponent<RouteComponentProps> = ({
-  history,
-}) => {
+const RegistrationPage: React.FunctionComponent<RouteComponentProps> = () => {
   const styles = useStyles();
   const { register } = useActions();
   const { isAuthenticated } = useTypedSelector((state) => state.authState);

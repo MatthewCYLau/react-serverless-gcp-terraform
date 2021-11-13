@@ -21,7 +21,7 @@ const LoginPage: React.FunctionComponent<RouteComponentProps> = () => {
 
   const formik = useFormik({
     initialValues,
-    onSubmit: (values, actions) => {
+    onSubmit: (_values, actions) => {
       login();
       actions.setSubmitting(false);
     },

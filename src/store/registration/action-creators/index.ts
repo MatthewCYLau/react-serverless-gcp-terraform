@@ -24,7 +24,7 @@ export const register = (registrationBody: RegistrationBody) => {
         password,
       });
       dispatch({
-        type: AuthActionType.AUTH_REQUEST_SUCCESS,
+        type: AuthActionType.LOGIN_SUCCESS,
         payload: {},
       });
     } catch (err) {
