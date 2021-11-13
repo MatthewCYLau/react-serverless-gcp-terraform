@@ -6,7 +6,8 @@ locals {
 data "archive_file" "source" {
   type        = "zip"
   source_dir  = var.source_dir
-  output_path = "${var.source_dir}/${var.name}-${local.timestamp}.zip"
+  output_path = "${var.source_dir}/zip/${var.name}-${local.timestamp}.zip"
+   excludes    = ["zip"]
 }
 
 # Add source code zip to bucket
