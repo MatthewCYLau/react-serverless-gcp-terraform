@@ -29,7 +29,7 @@ const createPool = async () => {
   return createTcpPool(config);
 };
 
-const ensureSchema = async (pool) => {
+const ensureUsersSchema = async (pool) => {
   const hasTable = await pool.schema.hasTable("users");
   if (!hasTable) {
     return pool.schema.createTable("users", (table) => {
@@ -41,10 +41,27 @@ const ensureSchema = async (pool) => {
   }
 };
 
+const ensureTodosSchema = async (pool) => {
+  const hasTable = await pool.schema.hasTable("todos");
+  if (!hasTable) {
+    return pool.schema.createTable("todos", (table) => {
+      table.increments("todo_id").primary();
+      table.specificType("subject", "VARCHAR(100)").notNullable();
+      table.specificType("body", "VARCHAR(100)").notNullable();
+      table.specificType("owner", "VARCHAR(100)").notNullable();
+      table.timestamp("time_created", 30).notNullable();
+    });
+  }
+};
+
 const createPoolAndEnsureSchema = async () =>
   await createPool()
     .then(async (pool) => {
-      await ensureSchema(pool);
+      await ensureUsersSchema(pool);
+      return pool;
+    })
+    .then(async (pool) => {
+      await ensureTodosSchema(pool);
       return pool;
     })
     .catch((err) => {
