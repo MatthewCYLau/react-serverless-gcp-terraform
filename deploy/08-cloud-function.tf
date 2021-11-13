@@ -8,7 +8,7 @@ resource "google_storage_bucket" "cloud_functions" {
 
 locals {
   cloud_functions = {
-    "users-api" = { source_dir = "./functions/users-api", entry_point = "app", environment_variables = {
+    "api" = { source_dir = "./functions/api", entry_point = "app", environment_variables = {
       DB_HOST = "${google_sql_database_instance.db_instance.public_ip_address}:5432"
       DB_USER = google_sql_user.postgresql_database_user.name
       DB_PASS = google_sql_user.postgresql_database_user.password
