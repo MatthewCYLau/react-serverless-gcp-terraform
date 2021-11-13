@@ -1,4 +1,4 @@
-import { RouteComponentProps, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import React from "react";
 import { Container, Grid, Typography, Button } from "@material-ui/core";
 import helloImage from "../../assets/hello.png";
@@ -9,7 +9,7 @@ type Section = {
   html: React.ReactNode;
 };
 
-const LandingPage: React.FunctionComponent<RouteComponentProps> = () => {
+const LandingPage: React.FunctionComponent = () => {
   const styles = useStyles();
 
   const sections: Section[] = [

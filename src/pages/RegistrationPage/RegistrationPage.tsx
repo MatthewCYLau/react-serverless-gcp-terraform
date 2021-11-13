@@ -1,5 +1,5 @@
 import React from "react";
-import { RouteComponentProps, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { Container, Typography, TextField, Button } from "@material-ui/core";
 import { useFormik } from "formik";
 import { useActions } from "../../hooks/useActions";
@@ -12,7 +12,7 @@ interface RegistrationFormValues {
   password: string;
 }
 
-const RegistrationPage: React.FunctionComponent<RouteComponentProps> = () => {
+const RegistrationPage: React.FunctionComponent = () => {
   const styles = useStyles();
   const { register } = useActions();
   const { isAuthenticated } = useTypedSelector((state) => state.authState);
