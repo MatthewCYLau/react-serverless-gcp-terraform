@@ -1,3 +1,12 @@
+import * as authActionCreators from "./auth/action-creators";
+import * as registrationActionCreators from "./registration/action-creators";
+
 export * from "./store";
-export * as actionCreators from "./auth/action-creators";
 export * from "./reducers";
+
+const combinedActionCreators = {
+  ...authActionCreators,
+  ...registrationActionCreators,
+};
+
+export default combinedActionCreators;

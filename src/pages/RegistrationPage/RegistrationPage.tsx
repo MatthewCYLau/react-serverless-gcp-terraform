@@ -15,14 +15,14 @@ const RegistrationPage: React.FunctionComponent<RouteComponentProps> = ({
   history,
 }) => {
   const styles = useStyles();
-  const { login } = useActions();
+  const { register } = useActions();
 
   const initialValues: RegistrationFormValues = { username: "", password: "" };
 
   const formik = useFormik({
     initialValues,
     onSubmit: (values, actions) => {
-      login();
+      register();
       actions.setSubmitting(false);
       history.push("/dashboard");
     },
