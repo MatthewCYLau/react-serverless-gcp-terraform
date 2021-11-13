@@ -3,11 +3,13 @@ steps:
   - name: node:16.13.0
     entrypoint: yarn
     args: ["install"]
-  # Run custom commands
+  - name: node:16.13.0
+    entrypoint: npm
+    args: ["run", "create-env"]
+    env:
+      - "REACT_APP_API_BASE_URL=${_REACT_APP_API_BASE_URL}"
   - name: node:16.13.0
     entrypoint: yarn
     args: ["run", "build"]
   - name: "gcr.io/cloud-builders/gsutil"
     args: ["-m", "cp", "-r", "build/*", "gs://${_BUCKET_NAME}"]
-    env:
-      - "REACT_APP_API_BASE_URL=${_REACT_APP_API_BASE_URL}"
