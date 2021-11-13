@@ -43,6 +43,16 @@ terraform apply # deploys GCP stack
 terraform destroy # destroys GCP stack
 ```
 
+## Build/run app locally
+
+- Create a `.env` file with the following, and place at project root directory:
+
+```bash
+REACT_APP_API_BASE_URL=<CLOUDFUNCTION-TRIGGER-URL>
+```
+
+- Run `npm run start` and visit aapp at `http://localhost:3000`
+
 ## Domain configuration
 
 - Creat an A record and point it to the external static IP address. See reference GCP documentaion [here](https://cloud.google.com/storage/docs/hosting-static-website#connect-domain)
