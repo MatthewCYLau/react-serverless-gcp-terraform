@@ -1,7 +1,6 @@
 steps:
-  # Install dependencies
   - name: node:16.13.0
-    entrypoint: yarn
+    entrypoint: npm
     args: ["install"]
   - name: node:16.13.0
     entrypoint: npm
