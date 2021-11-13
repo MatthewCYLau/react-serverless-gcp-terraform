@@ -8,10 +8,7 @@ import { API_BASE_URL } from "../../../constants";
 export const login = () => {
   return async (dispatch: Dispatch<Actions>) => {
     try {
-      const { data } = await axios.get(
-        `https://jsonplaceholder.typicode.com/users`
-      );
-      console.log(data);
+      await axios.get(`https://jsonplaceholder.typicode.com/users`);
       dispatch({
         type: ActionType.LOGIN_SUCCESS,
         payload: {},
@@ -50,16 +47,18 @@ export const register = (registrationBody: RegistrationBody) => {
 export const loadUser = () => {
   return async (dispatch: Dispatch<Actions>) => {
     try {
-      const { data } = await axios.get(
-        `https://jsonplaceholder.typicode.com/users`
-      );
-      console.log(data);
-      dispatch({
-        type: ActionType.USER_LOADED,
-        payload: {
-          username: "foo-bar",
-        },
-      });
+      await axios.get(`https://jsonplaceholder.typicode.com/users`);
+      localStorage.getItem("token") === "foo-bar"
+        ? dispatch({
+            type: ActionType.USER_LOADED,
+            payload: {
+              username: "foo-bar",
+            },
+          })
+        : dispatch({
+            type: ActionType.AUTH_ERROR,
+            payload: {},
+          });
     } catch (err) {
       dispatch({
         type: ActionType.AUTH_ERROR,

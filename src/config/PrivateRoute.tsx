@@ -12,12 +12,18 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
   component: Component,
   ...rest
 }) => {
-  const { isAuthenticated } = useTypedSelector((state) => state.authState);
+  const { isAuthenticated, loading } = useTypedSelector(
+    (state) => state.authState
+  );
   return (
     <Route
       {...rest}
       render={(props) =>
-        !isAuthenticated ? <Redirect to="/login" /> : <Component {...props} />
+        !isAuthenticated && !loading ? (
+          <Redirect to="/login" />
+        ) : (
+          <Component {...props} />
+        )
       }
     />
   );
