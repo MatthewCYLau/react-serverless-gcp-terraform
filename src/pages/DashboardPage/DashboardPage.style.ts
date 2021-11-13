@@ -25,7 +25,7 @@ export default makeStyles(
         width: "100%",
         marginBottom: spacing(3),
         [breakpoints.up("md")]: {
-          maxWidth: 400,
+          maxWidth: 300,
           marginBottom: 0,
           marginRight: spacing(3),
         },

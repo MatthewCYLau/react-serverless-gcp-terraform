@@ -1,11 +1,12 @@
 import React from "react";
 import { Container, Typography } from "@material-ui/core";
 import CircularProgress from "@mui/material/CircularProgress";
+import Card from "../../components/Card";
 import monitorImage from "../../assets/monitor.png";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import useStyles from "./DashboardPage.style";
 
-const DashboardPage = () => {
+const DashboardPage: React.FunctionComponent = () => {
   const styles = useStyles();
   const { loading } = useTypedSelector((state) => state.authState);
 
@@ -16,9 +17,12 @@ const DashboardPage = () => {
       ) : (
         <div className={styles.content}>
           <img className={styles.image} src={monitorImage} alt="Monitor" />
-          <Typography variant="h4" component="h2" paragraph>
-            Dashboard
-          </Typography>
+          <Container component="main" maxWidth="lg">
+            <Typography variant="h4" component="h2" paragraph>
+              Dashboard
+            </Typography>
+            <Card subject="foo" body="bar" />
+          </Container>
         </div>
       )}
     </Container>
