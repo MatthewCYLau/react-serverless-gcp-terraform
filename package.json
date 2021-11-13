@@ -31,7 +31,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "env-cmd react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx --fix",
@@ -60,6 +60,7 @@
     "@types/react-dom": "^17.0.10",
     "@types/react-router-dom": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.22.1",
-    "@typescript-eslint/parser": "^4.22.1"
+    "@typescript-eslint/parser": "^4.22.1",
+    "env-cmd": "^10.1.0"
   }
 }
