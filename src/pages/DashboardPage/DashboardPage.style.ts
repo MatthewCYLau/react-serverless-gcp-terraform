@@ -39,6 +39,9 @@ export default makeStyles(
       loader: {
         margin: "auto auto",
       },
+      todos: {
+        margin: "10px 0",
+      },
     }),
-  { name: "RoutingPage" }
+  { name: "DashboardPage" }
 );

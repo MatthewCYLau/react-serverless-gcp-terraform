@@ -42,5 +42,5 @@ export default makeStyles(
         },
       },
     }),
-  { name: "RegistrationPage" }
+  { name: "CreateTodoPage" }
 );

@@ -1,5 +1,6 @@
 import React from "react";
-import { Container, Typography } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import { Container, Typography, Button } from "@material-ui/core";
 import CircularProgress from "@mui/material/CircularProgress";
 import Card from "../../components/Card";
 import monitorImage from "../../assets/monitor.png";
@@ -21,7 +22,19 @@ const DashboardPage: React.FunctionComponent = () => {
             <Typography variant="h4" component="h2" paragraph>
               Dashboard
             </Typography>
-            <Card subject="foo" body="bar" />
+            <div className={styles.todos}>
+              <Card subject="foo" body="bar" />
+              <Card subject="foo" body="bar" />
+            </div>
+            <Button
+              component={Link}
+              variant="contained"
+              color="primary"
+              disableElevation
+              to="/create-todo"
+            >
+              Create Todo
+            </Button>
           </Container>
         </div>
       )}
