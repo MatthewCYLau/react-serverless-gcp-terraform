@@ -21,8 +21,20 @@ interface CreateTodoErrorAction {
   payload: {};
 }
 
+interface DeleteTodoSuccessAction {
+  type: ActionType.DELETE_TODO_SUCCESS;
+  payload: {};
+}
+
+interface DeleteTodoErrorAction {
+  type: ActionType.DELETE_TODO_ERROR;
+  payload: {};
+}
+
 export type Actions =
   | GetTodosSuccessAction
   | GetTodosErrorAction
   | CreateTodoSuccessAction
-  | CreateTodoErrorAction;
+  | CreateTodoErrorAction
+  | DeleteTodoSuccessAction
+  | DeleteTodoErrorAction;

@@ -10,13 +10,16 @@ import useStyles from "./DashboardPage.style";
 
 const DashboardPage: React.FunctionComponent = () => {
   const styles = useStyles();
-  const { getTodos } = useActions();
+  const { getTodos, deleteTodo } = useActions();
   const { loading } = useTypedSelector((state) => state.authState);
   const { todos } = useTypedSelector((state) => state.todoState);
 
   useEffect(() => {
     getTodos();
-  }, [getTodos]);
+    // eslint-disable-next-line
+  }, []);
+
+  const handleOnClick = (id: number) => deleteTodo(id);
 
   return (
     <Container component="main" maxWidth="lg" className={styles.root}>
@@ -35,6 +38,7 @@ const DashboardPage: React.FunctionComponent = () => {
                   subject={todo.subject}
                   body={todo.body}
                   key={todo.todo_id}
+                  onClick={() => handleOnClick(todo.todo_id)}
                 />
               ))}
             </div>

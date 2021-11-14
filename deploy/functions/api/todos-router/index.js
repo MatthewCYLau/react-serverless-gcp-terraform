@@ -19,6 +19,14 @@ const insertTodoToDatabase = async (pool, todo) => {
   }
 };
 
+const deleteTodoFromDatabase = async (pool, todo_id) => {
+  try {
+    return await pool("todos").where({ todo_id }).del();
+  } catch (err) {
+    throw Error(err);
+  }
+};
+
 router.post("/", async (req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
 
@@ -46,6 +54,27 @@ router.post("/", async (req, res) => {
     return;
   }
   res.status(200).send("Todo created");
+});
+
+router.delete("/:id", async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+
+  if (req.method === "OPTIONS") {
+    res.set("Access-Control-Allow-Methods", "GET");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+    res.set("Access-Control-Max-Age", "3600");
+    res.status(204).send("");
+  }
+  pool = pool || (await db.createPoolAndEnsureSchema());
+
+  try {
+    await deleteTodoFromDatabase(pool, req.params.id);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Unable to delete todo");
+    return;
+  }
+  res.status(200).send("Todo deleted");
 });
 
 router.get("/", async (req, res) => {

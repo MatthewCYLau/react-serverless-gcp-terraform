@@ -43,3 +43,20 @@ export const createTodo = (createTodoBody: CreateTodoBody) => {
     }
   };
 };
+
+export const deleteTodo = (todo_id: number) => {
+  return async (dispatch: Dispatch<Actions>) => {
+    try {
+      await axios.delete(`${API_BASE_URL}/todos/${todo_id}`);
+      dispatch({
+        type: ActionType.DELETE_TODO_SUCCESS,
+        payload: {},
+      });
+    } catch (err) {
+      dispatch({
+        type: ActionType.DELETE_TODO_ERROR,
+        payload: {},
+      });
+    }
+  };
+};

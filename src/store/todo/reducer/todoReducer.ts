@@ -24,6 +24,7 @@ const reducer = (
         todos: action.payload,
       };
     case ActionType.GET_TODOS_ERROR:
+    case ActionType.DELETE_TODO_ERROR:
       return {
         ...state,
         loading: false,

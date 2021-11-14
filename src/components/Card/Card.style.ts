@@ -7,6 +7,9 @@ export default makeStyles(
         margin: "5px 0",
         width: "300px",
       },
+      button: {
+        marginTop: "5px",
+      },
     }),
   { name: "Card" }
 );

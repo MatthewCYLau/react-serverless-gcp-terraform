@@ -41,7 +41,7 @@ export default makeStyles(
       },
       todos: {
         margin: "10px 0",
-        height: "400px",
+        maxHeight: "400px",
         overflowY: "scroll",
       },
     }),
