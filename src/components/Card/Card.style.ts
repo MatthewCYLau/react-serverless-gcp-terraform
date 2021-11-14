@@ -5,6 +5,7 @@ export default makeStyles(
     createStyles({
       card: {
         margin: "5px 0",
+        width: "300px",
       },
     }),
   { name: "Card" }

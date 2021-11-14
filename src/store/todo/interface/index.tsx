@@ -1,8 +1,12 @@
-export interface Todo {
+export interface Todo extends CreateTodoBody {
+  todo_id: number;
+  time_created: string;
+}
+
+export interface CreateTodoBody {
+  owner: string;
   subject: string;
   body: string;
 }
 
-export interface CreateTodoBody extends Todo {
-  owner: string;
-}
+export type TodosList = Todo[];

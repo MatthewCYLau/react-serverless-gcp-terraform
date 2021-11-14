@@ -41,6 +41,8 @@ export default makeStyles(
       },
       todos: {
         margin: "10px 0",
+        height: "400px",
+        overflowY: "scroll",
       },
     }),
   { name: "DashboardPage" }

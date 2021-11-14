@@ -3,13 +3,12 @@ import { Dispatch } from "redux";
 import { ActionType } from "../action-types";
 import { Actions } from "../actions";
 import { API_BASE_URL } from "../../../constants";
-import { CreateTodoBody } from "../interface";
+import { CreateTodoBody, TodosList } from "../interface";
 
 export const getTodos = () => {
   return async (dispatch: Dispatch<Actions>) => {
     try {
-      const { data } = await axios.get(`${API_BASE_URL}/todos`);
-      // const todos = data.objects.map((result: any) => result.package.name);
+      const { data } = await axios.get<TodosList>(`${API_BASE_URL}/todos`);
       dispatch({
         type: ActionType.GET_TODOS_SUCCESS,
         payload: data,
@@ -26,7 +25,6 @@ export const getTodos = () => {
 export const createTodo = (createTodoBody: CreateTodoBody) => {
   return async (dispatch: Dispatch<Actions>) => {
     try {
-      const { data } = await axios.get(`${API_BASE_URL}/todos`);
       const { subject, body, owner } = createTodoBody;
       await axios.post(`${API_BASE_URL}/todos`, {
         subject,
@@ -37,7 +35,6 @@ export const createTodo = (createTodoBody: CreateTodoBody) => {
         type: ActionType.CREATE_TODO_SUCCESS,
         payload: {},
       });
-      getTodos();
     } catch (err) {
       dispatch({
         type: ActionType.CREATE_TODO_ERROR,

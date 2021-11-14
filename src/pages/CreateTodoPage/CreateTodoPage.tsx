@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import { useActions } from "../../hooks/useActions";
 import taskImage from "../../assets/task.png";
 import useStyles from "./CreateTodoPage.style";
+import { RouteComponentProps } from "react-router";
 
 interface CreateTodoFormValues {
   subject: string;
@@ -11,7 +12,9 @@ interface CreateTodoFormValues {
   owner: string;
 }
 
-const CreateTodoPage: React.FunctionComponent = () => {
+const CreateTodoPage: React.FunctionComponent<RouteComponentProps> = ({
+  history,
+}) => {
   const styles = useStyles();
   const { createTodo } = useActions();
 
@@ -26,6 +29,7 @@ const CreateTodoPage: React.FunctionComponent = () => {
     onSubmit: (values, actions) => {
       createTodo({ ...values, owner: "Jon Doe" });
       actions.setSubmitting(false);
+      history.push("/dashboard");
     },
   });
 

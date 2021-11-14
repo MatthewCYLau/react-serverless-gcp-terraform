@@ -1,8 +1,9 @@
+import { TodosList } from "../interface";
 import { ActionType } from "../action-types";
 
 interface GetTodosSuccessAction {
   type: ActionType.GET_TODOS_SUCCESS;
-  payload: any;
+  payload: TodosList;
 }
 
 interface GetTodosErrorAction {

@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Container, Typography, Button } from "@material-ui/core";
 import CircularProgress from "@mui/material/CircularProgress";
 import Card from "../../components/Card";
 import monitorImage from "../../assets/monitor.png";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useActions } from "../../hooks/useActions";
 import useStyles from "./DashboardPage.style";
 
 const DashboardPage: React.FunctionComponent = () => {
   const styles = useStyles();
+  const { getTodos } = useActions();
   const { loading } = useTypedSelector((state) => state.authState);
+  const { todos } = useTypedSelector((state) => state.todoState);
+
+  useEffect(() => {
+    getTodos();
+  }, [getTodos]);
 
   return (
     <Container component="main" maxWidth="lg" className={styles.root}>
@@ -23,8 +30,13 @@ const DashboardPage: React.FunctionComponent = () => {
               Dashboard
             </Typography>
             <div className={styles.todos}>
-              <Card subject="foo" body="bar" />
-              <Card subject="foo" body="bar" />
+              {todos.map((todo) => (
+                <Card
+                  subject={todo.subject}
+                  body={todo.body}
+                  key={todo.todo_id}
+                />
+              ))}
             </div>
             <Button
               component={Link}

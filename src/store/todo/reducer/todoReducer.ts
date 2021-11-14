@@ -1,10 +1,10 @@
 import { Actions } from "../actions";
 import { ActionType } from "../action-types";
-import { Todo } from "../interface";
+import { TodosList } from "../interface";
 
 interface TodoState {
   loading: boolean;
-  todos: Todo[];
+  todos: TodosList;
 }
 
 const initialState = {
