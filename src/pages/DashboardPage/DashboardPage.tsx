@@ -21,6 +21,8 @@ const DashboardPage: React.FunctionComponent = () => {
 
   const handleOnClick = (id: number) => deleteTodo(id);
 
+  const handleOnRefresh = () => getTodos();
+
   return (
     <Container component="main" maxWidth="lg" className={styles.root}>
       {loading ? (
@@ -43,6 +45,7 @@ const DashboardPage: React.FunctionComponent = () => {
               ))}
             </div>
             <Button
+              className={styles.button}
               component={Link}
               variant="contained"
               color="primary"
@@ -50,6 +53,15 @@ const DashboardPage: React.FunctionComponent = () => {
               to="/create-todo"
             >
               Create Todo
+            </Button>
+            <Button
+              className={styles.button}
+              onClick={() => handleOnRefresh()}
+              variant="contained"
+              color="secondary"
+              disableElevation
+            >
+              Refresh
             </Button>
           </Container>
         </div>

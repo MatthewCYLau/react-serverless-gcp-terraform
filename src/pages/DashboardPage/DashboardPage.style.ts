@@ -44,6 +44,10 @@ export default makeStyles(
         maxHeight: "400px",
         overflowY: "scroll",
       },
+      button: {
+        marginRight: "5px",
+        marginLeft: "5px",
+      },
     }),
   { name: "DashboardPage" }
 );
