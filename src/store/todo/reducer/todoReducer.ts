@@ -23,12 +23,16 @@ const reducer = (
         loading: false,
         todos: action.payload,
       };
-
     case ActionType.GET_TODOS_ERROR:
       return {
         ...state,
         loading: false,
         todos: [],
+      };
+    case ActionType.CREATE_TODO_SUCCESS:
+      return {
+        ...state,
+        loading: false,
       };
     default:
       return state;

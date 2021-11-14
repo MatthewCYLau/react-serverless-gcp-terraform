@@ -1,5 +1,4 @@
 import { ActionType } from "../action-types";
-// import { Todo } from "../interface";
 
 interface GetTodosSuccessAction {
   type: ActionType.GET_TODOS_SUCCESS;
@@ -11,4 +10,18 @@ interface GetTodosErrorAction {
   payload: {};
 }
 
-export type Actions = GetTodosSuccessAction | GetTodosErrorAction;
+interface CreateTodoSuccessAction {
+  type: ActionType.CREATE_TODO_SUCCESS;
+  payload: {};
+}
+
+interface CreateTodoErrorAction {
+  type: ActionType.CREATE_TODO_ERROR;
+  payload: {};
+}
+
+export type Actions =
+  | GetTodosSuccessAction
+  | GetTodosErrorAction
+  | CreateTodoSuccessAction
+  | CreateTodoErrorAction;
