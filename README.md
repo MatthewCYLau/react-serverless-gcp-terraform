@@ -4,6 +4,8 @@ A reference project to deploy a static React app onto Google Cloud Storage, [Clo
 
 App URL [here](https://matlau.co.uk/)
 
+![GCP Architecture](img/gcp-architecture.png)
+
 ## Pre-requisites
 
 - You own a domain via [Google Domains](https://domains.google/intl/en-GB/)
