@@ -1,35 +1,28 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
 import { Container, Typography, TextField, Button } from "@material-ui/core";
 import { useFormik } from "formik";
 import { useActions } from "../../hooks/useActions";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
 import keyImage from "../../assets/key.png";
 import useStyles from "./CreateTodoPage.style";
 
-interface LoginFormValues {
-  username: string;
-  password: string;
+interface CreateTodoFormValues {
+  subject: string;
+  body: string;
 }
 
-const LoginPage: React.FunctionComponent = () => {
+const CreateTodoPage: React.FunctionComponent = () => {
   const styles = useStyles();
-  const { login } = useActions();
-  const { isAuthenticated } = useTypedSelector((state) => state.authState);
+  const { getTodos } = useActions();
 
-  const initialValues: LoginFormValues = { username: "", password: "" };
+  const initialValues: CreateTodoFormValues = { subject: "", body: "" };
 
   const formik = useFormik({
     initialValues,
     onSubmit: (_values, actions) => {
-      login();
+      // login();
       actions.setSubmitting(false);
     },
   });
-
-  if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
-  }
 
   return (
     <Container component="main" maxWidth="lg" className={styles.root}>
@@ -37,14 +30,14 @@ const LoginPage: React.FunctionComponent = () => {
         <img className={styles.image} src={keyImage} alt="key" />
         <form onSubmit={formik.handleSubmit}>
           <Typography variant="h4" component="h2" paragraph>
-            Login
+            Create Todo
           </Typography>
           <TextField
             fullWidth
             id="username"
             name="username"
             label="Username"
-            value={formik.values.username}
+            value={formik.values.subject}
             onChange={formik.handleChange}
             className={styles.textField}
           />
@@ -53,7 +46,7 @@ const LoginPage: React.FunctionComponent = () => {
             id="password"
             name="password"
             label="Password"
-            value={formik.values.password}
+            value={formik.values.body}
             onChange={formik.handleChange}
             className={styles.textField}
           />
@@ -66,4 +59,4 @@ const LoginPage: React.FunctionComponent = () => {
   );
 };
 
-export default LoginPage;
+export default CreateTodoPage;

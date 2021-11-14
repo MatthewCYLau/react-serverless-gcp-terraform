@@ -7,10 +7,11 @@ import { API_BASE_URL } from "../../../constants";
 export const getTodos = () => {
   return async (dispatch: Dispatch<Actions>) => {
     try {
-      await axios.get(`${API_BASE_URL}/todos`);
+      const { data } = await axios.get(`${API_BASE_URL}/todos`);
+      // const todos = data.objects.map((result: any) => result.package.name);
       dispatch({
         type: ActionType.GET_TODOS_SUCCESS,
-        payload: {},
+        payload: data,
       });
     } catch (err) {
       dispatch({

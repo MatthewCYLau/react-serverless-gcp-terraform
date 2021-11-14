@@ -21,7 +21,7 @@ const reducer = (
       return {
         ...state,
         loading: false,
-        todos: [],
+        todos: action.payload,
       };
 
     case ActionType.GET_TODOS_ERROR:
