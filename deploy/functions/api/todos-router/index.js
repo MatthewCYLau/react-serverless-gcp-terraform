@@ -4,16 +4,16 @@ const router = express.Router();
 
 let pool;
 
-const getUsersFromDatabase = async (pool) => {
+const getTodosFromDatabase = async (pool) => {
   return await pool
-    .select("user_id", "username", "time_created")
-    .from("users")
+    .select("todo_id", "subject", "body", "owner", "time_created")
+    .from("todos")
     .orderBy("time_created", "desc");
 };
 
-const insertUserToDatabase = async (pool, user) => {
+const insertTodoToDatabase = async (pool, todo) => {
   try {
-    return await pool("users").insert(user);
+    return await pool("todos").insert(todo);
   } catch (err) {
     throw Error(err);
   }
@@ -29,22 +29,23 @@ router.post("/", async (req, res) => {
     res.status(204).send("");
   }
   pool = pool || (await db.createPoolAndEnsureSchema());
-  const { username, password } = req.body;
+  const { subject, body, owner } = req.body;
   const timestamp = new Date();
-  const user = {
-    username,
-    password,
+  const todo = {
+    subject,
+    body,
+    owner,
     time_created: timestamp,
   };
 
   try {
-    await insertUserToDatabase(pool, user);
+    await insertTodoToDatabase(pool, todo);
   } catch (err) {
     console.log(err);
-    res.status(500).send("Unable to create user").end();
+    res.status(500).send("Unable to create todo");
     return;
   }
-  res.status(200).send("User created");
+  res.status(200).send("Todo created");
 });
 
 router.get("/", async (req, res) => {
@@ -59,14 +60,14 @@ router.get("/", async (req, res) => {
   pool = pool || (await db.createPoolAndEnsureSchema());
 
   try {
-    const users = await getUsersFromDatabase(pool);
-    return res.status(200).send(users);
+    const todos = await getTodosFromDatabase(pool);
+    return res.status(200).send(todos);
   } catch (err) {
     console.log(err);
-    return res.status(500).send("Unable to get users");
+    return res.status(500).send("Unable to get todos");
   }
 });
 
 module.exports = {
-  usersRouter: router,
+  todosRouter: router,
 };
