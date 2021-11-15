@@ -1,14 +1,21 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { Dispatch } from "redux";
 import { ActionType } from "../action-types";
 import { Actions } from "../actions";
-import { RegistrationBody } from "../interface";
+import { AuthBody, AuthResponse } from "../interface";
 import { API_BASE_URL } from "../../../constants";
+import setAuthToken from "../../../utils/setAuthToken";
 
-export const login = () => {
+export const login = ({ username = "", password = "" }: AuthBody) => {
   return async (dispatch: Dispatch<Actions>) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const body = JSON.stringify({ username, password });
     try {
-      await axios.get(`https://jsonplaceholder.typicode.com/users`);
+      await axios.post(`${API_BASE_URL}/auth`, body, config);
       dispatch({
         type: ActionType.LOGIN_SUCCESS,
         payload: {},
@@ -17,16 +24,15 @@ export const login = () => {
     } catch (err) {
       dispatch({
         type: ActionType.LOGIN_FAILED,
-        payload: {},
       });
     }
   };
 };
 
-export const register = (registrationBody: RegistrationBody) => {
+export const register = (authBody: AuthBody) => {
   return async (dispatch: Dispatch<Actions>) => {
     try {
-      const { username, password } = registrationBody;
+      const { username, password } = authBody;
       await axios.post(`${API_BASE_URL}/users`, {
         username,
         password,
@@ -46,19 +52,15 @@ export const register = (registrationBody: RegistrationBody) => {
 
 export const loadUser = () => {
   return async (dispatch: Dispatch<Actions>) => {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
     try {
-      await axios.get(`https://jsonplaceholder.typicode.com/users`);
-      localStorage.getItem("token") === "foo-bar"
-        ? dispatch({
-            type: ActionType.USER_LOADED,
-            payload: {
-              username: "foo-bar",
-            },
-          })
-        : dispatch({
-            type: ActionType.AUTH_ERROR,
-            payload: {},
-          });
+      const res: AxiosResponse<AuthResponse> = await axios.get("/api/auth");
+      dispatch({
+        type: ActionType.USER_LOADED,
+        payload: res.data,
+      });
     } catch (err) {
       dispatch({
         type: ActionType.AUTH_ERROR,

@@ -1,13 +1,12 @@
 import { ActionType } from "../action-types";
-import { User } from "../interface";
+import { AuthResponse } from "../interface";
 
 interface UserLoadedAction {
   type: ActionType.USER_LOADED;
-  payload: User;
+  payload: AuthResponse;
 }
 interface AuthErrorAction {
   type: ActionType.AUTH_ERROR;
-  payload: {};
 }
 
 interface RegistrationSuccessAction {
@@ -27,7 +26,6 @@ interface LoginSuccessAction {
 
 interface LoginFailedAction {
   type: ActionType.LOGIN_FAILED;
-  payload: {};
 }
 
 interface LogoutAction {

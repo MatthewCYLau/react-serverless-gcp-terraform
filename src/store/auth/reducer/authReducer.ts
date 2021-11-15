@@ -6,7 +6,7 @@ interface AuthState {
   token: string | null;
   isAuthenticated: boolean;
   loading: boolean;
-  user: User | null;
+  user: any;
 }
 
 const initialState = {
