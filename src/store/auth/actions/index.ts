@@ -32,7 +32,6 @@ interface LoginFailedAction {
 
 interface LogoutAction {
   type: ActionType.LOGOUT;
-  payload: {};
 }
 
 export type Actions =

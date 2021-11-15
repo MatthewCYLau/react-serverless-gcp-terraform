@@ -67,3 +67,7 @@ export const loadUser = () => {
     }
   };
 };
+
+export const logout = () => (dispatch: Dispatch<Actions>) => {
+  dispatch({ type: ActionType.LOGOUT });
+};
