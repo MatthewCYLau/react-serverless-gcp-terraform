@@ -2,6 +2,7 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const db = require("../db");
+const auth = require("../middleware/auth");
 const router = express.Router();
 
 const getUserFromDatabase = async (pool, username) => {
@@ -9,6 +10,16 @@ const getUserFromDatabase = async (pool, username) => {
 };
 
 let pool;
+
+router.get("/", auth, async (req, res) => {
+  try {
+    const results = await getUserFromDatabase(pool, req.user.username);
+    res.json(results[0]);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 router.post("/", async (req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
