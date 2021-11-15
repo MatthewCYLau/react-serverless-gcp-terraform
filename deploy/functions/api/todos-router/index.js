@@ -29,13 +29,6 @@ const deleteTodoFromDatabase = async (pool, todo_id) => {
 
 router.post("/", async (req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
-
-  if (req.method === "OPTIONS") {
-    res.set("Access-Control-Allow-Methods", "GET");
-    res.set("Access-Control-Allow-Headers", "Content-Type");
-    res.set("Access-Control-Max-Age", "3600");
-    res.status(204).send("");
-  }
   pool = pool || (await db.createPoolAndEnsureSchema());
   const { subject, body, owner } = req.body;
   const timestamp = new Date();
@@ -58,13 +51,6 @@ router.post("/", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
-
-  if (req.method === "OPTIONS") {
-    res.set("Access-Control-Allow-Methods", "GET");
-    res.set("Access-Control-Allow-Headers", "Content-Type");
-    res.set("Access-Control-Max-Age", "3600");
-    res.status(204).send("");
-  }
   pool = pool || (await db.createPoolAndEnsureSchema());
 
   try {
@@ -77,15 +63,8 @@ router.delete("/:id", async (req, res) => {
   res.status(200).send("Todo deleted");
 });
 
-router.get("/", async (req, res) => {
+router.get("/", async (_req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
-
-  if (req.method === "OPTIONS") {
-    res.set("Access-Control-Allow-Methods", "GET");
-    res.set("Access-Control-Allow-Headers", "Content-Type");
-    res.set("Access-Control-Max-Age", "3600");
-    res.status(204).send("");
-  }
   pool = pool || (await db.createPoolAndEnsureSchema());
 
   try {

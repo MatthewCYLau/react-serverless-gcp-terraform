@@ -27,13 +27,6 @@ const insertUserToDatabase = async (pool, user) => {
 
 router.post("/", async (req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
-
-  if (req.method === "OPTIONS") {
-    res.set("Access-Control-Allow-Methods", "GET");
-    res.set("Access-Control-Allow-Headers", "Content-Type");
-    res.set("Access-Control-Max-Age", "3600");
-    res.status(204).send("");
-  }
   pool = pool || (await db.createPoolAndEnsureSchema());
   const { username, password } = req.body;
   const timestamp = new Date();
@@ -74,18 +67,10 @@ router.post("/", async (req, res) => {
       .status(400)
       .json({ errors: [{ msg: "Error when creating user" }] });
   }
-  // res.status(200).send("User created");
 });
 
-router.get("/", async (req, res) => {
+router.get("/", async (_req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
-
-  if (req.method === "OPTIONS") {
-    res.set("Access-Control-Allow-Methods", "GET");
-    res.set("Access-Control-Allow-Headers", "Content-Type");
-    res.set("Access-Control-Max-Age", "3600");
-    res.status(204).send("");
-  }
   pool = pool || (await db.createPoolAndEnsureSchema());
 
   try {
