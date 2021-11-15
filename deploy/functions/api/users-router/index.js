@@ -1,4 +1,6 @@
 const express = require("express");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const db = require("../db");
 const router = express.Router();
 
@@ -9,6 +11,10 @@ const getUsersFromDatabase = async (pool) => {
     .select("user_id", "username", "time_created")
     .from("users")
     .orderBy("time_created", "desc");
+};
+
+const getUserFromDatabase = async (pool, username) => {
+  return await pool("users").where({ username: username });
 };
 
 const insertUserToDatabase = async (pool, user) => {
@@ -31,20 +37,44 @@ router.post("/", async (req, res) => {
   pool = pool || (await db.createPoolAndEnsureSchema());
   const { username, password } = req.body;
   const timestamp = new Date();
-  const user = {
-    username,
-    password,
-    time_created: timestamp,
-  };
 
   try {
+    const results = await getUserFromDatabase(pool, username);
+    if (results.length > 0) {
+      return res.status(400).json({ errors: [{ msg: "User already exists" }] });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    const user = {
+      username,
+      password: hashedPassword,
+      time_created: timestamp,
+    };
     await insertUserToDatabase(pool, user);
+    const payload = {
+      user: {
+        username: user.username,
+      },
+    };
+
+    jwt.sign(
+      payload,
+      process.env.JWT_SECRET || "superlongjwtsecret",
+      { expiresIn: 360000 },
+      (err, token) => {
+        if (err) throw err;
+        res.json({ token });
+      }
+    );
   } catch (err) {
     console.log(err);
-    res.status(500).send("Unable to create user").end();
-    return;
+    return res
+      .status(400)
+      .json({ errors: [{ msg: "Error when creating user" }] });
   }
-  res.status(200).send("User created");
+  // res.status(200).send("User created");
 });
 
 router.get("/", async (req, res) => {

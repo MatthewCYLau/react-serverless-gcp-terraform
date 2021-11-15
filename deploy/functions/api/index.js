@@ -6,11 +6,13 @@ const db = require("./db");
 const app = express();
 const usersRouter = require("./users-router");
 const todosRouter = require("./todos-router");
+const authRouter = require("./auth-router");
 
 app.use(express.json());
 app.use(cors());
 app.use("/users", usersRouter.usersRouter);
 app.use("/todos", todosRouter.todosRouter);
+app.use("/auth", authRouter.authRouter);
 
 let pool;
 
