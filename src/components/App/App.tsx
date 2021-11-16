@@ -8,6 +8,7 @@ import useStyles from "./App.style";
 import createTheme from "../../config/Theme";
 import Routes from "../../config/Routes";
 import Header from "../Header";
+import Alert from "../Alert";
 
 export const ColorModeContext = React.createContext({
   mode: "",
@@ -25,6 +26,7 @@ const App = () => {
     <Router>
       <div className={styles.root}>
         <Header />
+        <Alert />
         <Switch>
           <Route component={Routes} />
         </Switch>
