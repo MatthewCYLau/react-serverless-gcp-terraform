@@ -5,6 +5,13 @@ const db = require("../db");
 const auth = require("../middleware/auth");
 const router = express.Router();
 
+const getUserWithoutPasswordFromDatabase = async (pool, username) => {
+  return await pool
+    .from("users")
+    .select("user_id", "username", "time_created")
+    .where("username", username);
+};
+
 const getUserFromDatabase = async (pool, username) => {
   return await pool("users").where({ username: username });
 };
@@ -13,7 +20,10 @@ let pool;
 
 router.get("/", auth, async (req, res) => {
   try {
-    const results = await getUserFromDatabase(pool, req.user.username);
+    const results = await getUserWithoutPasswordFromDatabase(
+      pool,
+      req.user.username
+    );
     res.json(results[0]);
   } catch (err) {
     console.error(err.message);
