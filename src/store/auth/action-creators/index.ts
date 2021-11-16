@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from "axios";
+import { useActions } from "../../../hooks/useActions";
 import { Dispatch } from "redux";
 import { ActionType } from "../action-types";
 import { Actions } from "../actions";
@@ -7,7 +8,7 @@ import { API_BASE_URL } from "../../../constants";
 import setAuthToken from "../../../utils/setAuthToken";
 
 export const login = ({ username = "", password = "" }: AuthBody) => {
-  return async (dispatch: Dispatch<Actions> | any) => {
+  return async (dispatch: Dispatch<Actions>) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -24,7 +25,8 @@ export const login = ({ username = "", password = "" }: AuthBody) => {
         type: ActionType.LOGIN_SUCCESS,
         payload: data,
       });
-      dispatch(loadUser());
+      const { loadUser } = useActions();
+      loadUser();
     } catch (err) {
       dispatch({
         type: ActionType.LOGIN_FAILED,

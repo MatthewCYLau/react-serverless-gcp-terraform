@@ -1,5 +1,5 @@
 resource "google_sql_database_instance" "db_instance" {
-  name   = "${var.project_name}-db-014"
+  name   = "${var.project_name}-db-015"
   region = var.region
 
   settings {

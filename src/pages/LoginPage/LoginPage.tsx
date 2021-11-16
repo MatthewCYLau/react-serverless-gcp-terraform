@@ -1,6 +1,7 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { Container, Typography, TextField, Button } from "@material-ui/core";
+import CircularProgress from "@mui/material/CircularProgress";
 import { useFormik } from "formik";
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
@@ -16,6 +17,7 @@ const LoginPage: React.FunctionComponent = () => {
   const styles = useStyles();
   const { login } = useActions();
   const { isAuthenticated } = useTypedSelector((state) => state.authState);
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   const initialValues: LoginFormValues = { username: "", password: "" };
 
@@ -57,8 +59,14 @@ const LoginPage: React.FunctionComponent = () => {
             onChange={formik.handleChange}
             className={styles.textField}
           />
-          <Button color="primary" variant="contained" fullWidth type="submit">
-            Submit
+          <Button
+            color="primary"
+            variant="contained"
+            fullWidth
+            type="submit"
+            onClick={() => setIsLoading(!isLoading)}
+          >
+            {isLoading ? <CircularProgress /> : "Submit"}
           </Button>
         </form>
       </div>
