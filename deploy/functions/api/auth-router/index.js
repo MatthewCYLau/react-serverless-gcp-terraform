@@ -19,6 +19,7 @@ const getUserFromDatabase = async (pool, username) => {
 let pool;
 
 router.get("/", auth, async (req, res) => {
+  pool = pool || (await db.createPoolAndEnsureSchema());
   try {
     const results = await getUserWithoutPasswordFromDatabase(
       pool,

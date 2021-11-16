@@ -1,9 +1,9 @@
 import { ActionType } from "../action-types";
-import { AuthResponse } from "../interface";
+import { User, Token } from "../interface";
 
 interface UserLoadedAction {
   type: ActionType.USER_LOADED;
-  payload: AuthResponse;
+  payload: User;
 }
 interface AuthErrorAction {
   type: ActionType.AUTH_ERROR;
@@ -11,7 +11,7 @@ interface AuthErrorAction {
 
 interface RegistrationSuccessAction {
   type: ActionType.REGISTRATION_SUCCESS;
-  payload: {};
+  payload: Token;
 }
 
 interface RegistrationFailedAction {
@@ -21,7 +21,7 @@ interface RegistrationFailedAction {
 
 interface LoginSuccessAction {
   type: ActionType.LOGIN_SUCCESS;
-  payload: {};
+  payload: Token;
 }
 
 interface LoginFailedAction {

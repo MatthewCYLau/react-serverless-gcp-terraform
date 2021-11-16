@@ -6,7 +6,7 @@ interface AuthState {
   token: string | null;
   isAuthenticated: boolean;
   loading: boolean;
-  user: any;
+  user: User | null;
 }
 
 const initialState = {
@@ -31,7 +31,7 @@ const reducer = (
 
     case ActionType.REGISTRATION_SUCCESS:
     case ActionType.LOGIN_SUCCESS:
-      localStorage.setItem("token", "foo-bar");
+      localStorage.setItem("token", action.payload.token);
       return {
         ...state,
         ...action.payload,
@@ -48,6 +48,7 @@ const reducer = (
         token: null,
         isAuthenticated: false,
         loading: false,
+        user: null,
       };
     default:
       return state;

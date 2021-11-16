@@ -1,5 +1,7 @@
 export interface User {
+  user_id: string;
   username: string;
+  time_created: string;
 }
 
 export interface AuthBody {
@@ -7,6 +9,6 @@ export interface AuthBody {
   password: string;
 }
 
-export interface AuthResponse {
+export interface Token {
   token: string;
 }

@@ -11,7 +11,7 @@ import useStyles from "./DashboardPage.style";
 const DashboardPage: React.FunctionComponent = () => {
   const styles = useStyles();
   const { getTodos, deleteTodo } = useActions();
-  const { loading } = useTypedSelector((state) => state.authState);
+  const { loading, user } = useTypedSelector((state) => state.authState);
   const { todos } = useTypedSelector((state) => state.todoState);
 
   useEffect(() => {
@@ -25,14 +25,14 @@ const DashboardPage: React.FunctionComponent = () => {
 
   return (
     <Container component="main" maxWidth="lg" className={styles.root}>
-      {loading ? (
+      {loading || !user ? (
         <CircularProgress className={styles.loader} />
       ) : (
         <div className={styles.content}>
           <img className={styles.image} src={monitorImage} alt="Monitor" />
           <Container component="main" maxWidth="lg">
             <Typography variant="h4" component="h2" paragraph>
-              Dashboard
+              Welcome {user.username}!
             </Typography>
             <div className={styles.todos}>
               {todos.map((todo) => (
