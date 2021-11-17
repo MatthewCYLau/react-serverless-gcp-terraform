@@ -6,7 +6,7 @@ import alertReducer from "../alert/reducer/alertReducer";
 const reducers = combineReducers({
   authState: authReducer,
   todoState: todoReducer,
-  alertReducer: alertReducer,
+  alertState: alertReducer,
 });
 
 export default reducers;

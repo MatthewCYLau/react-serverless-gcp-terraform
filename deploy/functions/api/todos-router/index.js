@@ -43,8 +43,9 @@ router.post("/", async (req, res) => {
     await insertTodoToDatabase(pool, todo);
   } catch (err) {
     console.log(err);
-    res.status(500).send("Unable to create todo");
-    return;
+    return res
+      .status(500)
+      .json({ errors: [{ message: "Error when creating todo" }] });
   }
   res.status(200).send("Todo created");
 });
@@ -57,8 +58,9 @@ router.delete("/:id", async (req, res) => {
     await deleteTodoFromDatabase(pool, req.params.id);
   } catch (err) {
     console.log(err);
-    res.status(500).send("Unable to delete todo");
-    return;
+    return res
+      .status(500)
+      .json({ errors: [{ message: "Error when deleting todo" }] });
   }
   res.status(200).send("Todo deleted");
 });
@@ -72,7 +74,9 @@ router.get("/", async (_req, res) => {
     return res.status(200).send(todos);
   } catch (err) {
     console.log(err);
-    return res.status(500).send("Unable to get todos");
+    return res
+      .status(500)
+      .json({ errors: [{ message: "Error when retriving todos" }] });
   }
 });
 

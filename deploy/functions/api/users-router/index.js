@@ -34,7 +34,9 @@ router.post("/", async (req, res) => {
   try {
     const results = await getUserFromDatabase(pool, username);
     if (results.length > 0) {
-      return res.status(400).json({ errors: [{ msg: "User already exists" }] });
+      return res
+        .status(400)
+        .json({ errors: [{ message: "User already exists" }] });
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -65,7 +67,7 @@ router.post("/", async (req, res) => {
     console.log(err);
     return res
       .status(400)
-      .json({ errors: [{ msg: "Error when creating user" }] });
+      .json({ errors: [{ message: "Error when creating user" }] });
   }
 });
 
@@ -78,7 +80,9 @@ router.get("/", async (_req, res) => {
     return res.status(200).send(users);
   } catch (err) {
     console.log(err);
-    return res.status(500).send("Unable to get users");
+    return res
+      .status(400)
+      .json({ errors: [{ message: "Error when retriving users" }] });
   }
 });
 

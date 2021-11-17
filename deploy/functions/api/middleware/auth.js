@@ -6,7 +6,7 @@ module.exports = async function (req, res, next) {
 
   // Check if not token
   if (!token) {
-    return res.status(401).json({ msg: "No token, authorization denied" });
+    return res.status(401).json({ message: "No token, authorization denied" });
   }
 
   // Verify token
@@ -16,7 +16,7 @@ module.exports = async function (req, res, next) {
       process.env.JWT_SECRET || "superlongjwtsecret",
       (error, decoded) => {
         if (error) {
-          res.status(401).json({ msg: "Token is not valid" });
+          res.status(401).json({ message: "Token is not valid" });
         } else {
           req.user = decoded.user;
           next();
@@ -25,6 +25,6 @@ module.exports = async function (req, res, next) {
     );
   } catch (err) {
     console.error("something wrong with auth middleware");
-    res.status(500).json({ msg: "Server Error" });
+    res.status(500).json({ message: "Server Error" });
   }
 };

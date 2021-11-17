@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { Container, Typography, TextField, Button } from "@material-ui/core";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -17,6 +17,7 @@ const LoginPage: React.FunctionComponent = () => {
   const styles = useStyles();
   const { login } = useActions();
   const { isAuthenticated } = useTypedSelector((state) => state.authState);
+  const { alerts } = useTypedSelector((state) => state.alertState);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   const initialValues: LoginFormValues = { username: "", password: "" };
@@ -28,6 +29,10 @@ const LoginPage: React.FunctionComponent = () => {
       actions.setSubmitting(false);
     },
   });
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, [alerts]);
 
   if (isAuthenticated) {
     return <Redirect to="/dashboard" />;

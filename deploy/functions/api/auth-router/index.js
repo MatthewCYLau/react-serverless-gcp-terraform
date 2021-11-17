@@ -27,8 +27,7 @@ router.get("/", auth, async (req, res) => {
     );
     res.json(results[0]);
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
+    return res.status(500).json({ errors: [{ message: "Server error" }] });
   }
 });
 
@@ -40,13 +39,17 @@ router.post("/", async (req, res) => {
     const results = await getUserFromDatabase(pool, username);
 
     if (!results.length > 0) {
-      return res.status(400).json({ errors: [{ msg: "Invalid Credentials" }] });
+      return res
+        .status(400)
+        .json({ errors: [{ message: "Invalid Credentials" }] });
     }
 
     const isMatch = await bcrypt.compare(password, results[0].password);
 
     if (!isMatch) {
-      return res.status(400).json({ errors: [{ msg: "Invalid Credentials" }] });
+      return res
+        .status(400)
+        .json({ errors: [{ message: "Invalid Credentials" }] });
     }
 
     const payload = {
@@ -66,7 +69,7 @@ router.post("/", async (req, res) => {
     );
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Server error");
+    return res.status(500).json({ errors: [{ message: "Server error" }] });
   }
 });
 
