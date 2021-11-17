@@ -48,7 +48,7 @@ const ensureTodosSchema = async (pool) => {
       table.increments("todo_id").primary();
       table.specificType("subject", "VARCHAR(100)").notNullable();
       table.specificType("body", "VARCHAR(100)").notNullable();
-      table.specificType("owner", "VARCHAR(100)").notNullable();
+      table.specificType("username", "VARCHAR(100)").notNullable();
       table.timestamp("time_created", 30).notNullable();
     });
   }

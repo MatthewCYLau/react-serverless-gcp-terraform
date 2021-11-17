@@ -8,7 +8,7 @@ import { CreateTodoBody, TodosList } from "../interface";
 export const getTodos = () => {
   return async (dispatch: Dispatch<Actions>) => {
     try {
-      const { data } = await axios.get<TodosList>(`${API_BASE_URL}/todos`);
+      const { data } = await axios.get<TodosList>(`${API_BASE_URL}/todos/me`);
       dispatch({
         type: ActionType.GET_TODOS_SUCCESS,
         payload: data,
@@ -25,11 +25,10 @@ export const getTodos = () => {
 export const createTodo = (createTodoBody: CreateTodoBody) => {
   return async (dispatch: Dispatch<Actions>) => {
     try {
-      const { subject, body, owner } = createTodoBody;
+      const { subject, body } = createTodoBody;
       await axios.post(`${API_BASE_URL}/todos`, {
         subject,
         body,
-        owner,
       });
       dispatch({
         type: ActionType.CREATE_TODO_SUCCESS,

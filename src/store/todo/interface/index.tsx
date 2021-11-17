@@ -4,7 +4,6 @@ export interface Todo extends CreateTodoBody {
 }
 
 export interface CreateTodoBody {
-  owner: string;
   subject: string;
   body: string;
 }

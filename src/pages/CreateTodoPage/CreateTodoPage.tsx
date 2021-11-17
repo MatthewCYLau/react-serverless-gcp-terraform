@@ -9,7 +9,6 @@ import { RouteComponentProps } from "react-router";
 interface CreateTodoFormValues {
   subject: string;
   body: string;
-  owner: string;
 }
 
 const CreateTodoPage: React.FunctionComponent<RouteComponentProps> = ({
@@ -21,13 +20,12 @@ const CreateTodoPage: React.FunctionComponent<RouteComponentProps> = ({
   const initialValues: CreateTodoFormValues = {
     subject: "",
     body: "",
-    owner: "",
   };
 
   const formik = useFormik({
     initialValues,
     onSubmit: (values, actions) => {
-      createTodo({ ...values, owner: "Jon Doe" });
+      createTodo(values);
       actions.setSubmitting(false);
       history.push("/dashboard");
     },

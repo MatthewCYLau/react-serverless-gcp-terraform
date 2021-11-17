@@ -53,6 +53,7 @@ const RegistrationPage: React.FunctionComponent = () => {
             id="password"
             name="password"
             label="Password"
+            type="password"
             value={formik.values.password}
             onChange={formik.handleChange}
             className={styles.textField}
