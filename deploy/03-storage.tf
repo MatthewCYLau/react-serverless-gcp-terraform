@@ -6,6 +6,7 @@ resource "google_storage_bucket" "static_site" {
 
   website {
     main_page_suffix = "index.html"
+    not_found_page   = "index.html"
   }
   labels = local.tags
 }
