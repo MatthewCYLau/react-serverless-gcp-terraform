@@ -22,6 +22,7 @@ resource "google_sql_database_instance" "db_instance" {
   }
 
 /*
+  // public network settings
   settings {
     tier              = "db-f1-micro"
     availability_type = "REGIONAL"
