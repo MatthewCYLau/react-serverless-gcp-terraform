@@ -4,7 +4,7 @@ resource "random_id" "db_name_suffix" {
 
 resource "google_sql_database_instance" "db_instance" {
   // name = "${var.project_name}-db-${random_id.db_name_suffix.hex}"
-  name   = "${var.project_name}-db-018"
+  name   = "${var.project_name}-db-019"
   region = var.region
 
   depends_on = [google_service_networking_connection.private_vpc_connection]
@@ -21,21 +21,23 @@ resource "google_sql_database_instance" "db_instance" {
     }
   }
 
-  # settings {
-  #   tier              = "db-f1-micro"
-  #   availability_type = "REGIONAL"
-  #   user_labels = {
-  #     "environment" : "production"
-  #   }
+/*
+  settings {
+    tier              = "db-f1-micro"
+    availability_type = "REGIONAL"
+    user_labels = {
+      "environment" : "production"
+    }
 
-  #   ip_configuration {
-  #     ipv4_enabled = true
-  #     authorized_networks {
-  #       name  = "public"
-  #       value = "0.0.0.0/0"
-  #     }
-  #   }
-  # }
+    ip_configuration {
+      ipv4_enabled = true
+      authorized_networks {
+        name  = "public"
+        value = "0.0.0.0/0"
+      }
+    }
+  }
+*/
   database_version    = "POSTGRES_13"
   deletion_protection = "false"
 }
