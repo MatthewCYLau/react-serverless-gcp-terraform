@@ -7,10 +7,6 @@ variable "project_name" {
   description = "Project name"
 }
 
-variable "credentials_filepath" {
-  description = "Local path to GCP service account key"
-}
-
 variable "bucket_name" {
   description = "Name of tatic site storage bucket"
 }

@@ -26,7 +26,6 @@ terraform -help # prints Terraform options
 
 ```bash
 project                = <GCP-PROJECT-ID>
-credentials_filepath   = <PATH-TO-GCP-SERVICE-ACCOUNT>
 bucket_name            = <STATIC-SITE-BUCKET-NAME>
 cloud_source_repo_name = <CLOUD-SOURCE-REPOSITORY-NAME>
 # and other variables
@@ -37,6 +36,7 @@ cloud_source_repo_name = <CLOUD-SOURCE-REPOSITORY-NAME>
 ## Deploy
 
 ```bash
+gcloud auth application-default login # authenticate with GCP
 cd deploy # change to deploy directory
 terraform init # initialises Terraform
 terraform apply # deploys GCP stack
