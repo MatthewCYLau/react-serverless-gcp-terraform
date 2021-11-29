@@ -18,8 +18,9 @@ locals {
 }
 
 resource "google_vpc_access_connector" "cloud_function_connector" {
-  provider = google-beta
-  name     = "vpc-connector"
+  provider     = google-beta
+  name         = "vpc-connector"
+  machine_type = "e2-micro"
   subnet {
     name = google_compute_subnetwork.subnet.name
   }

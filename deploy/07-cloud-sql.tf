@@ -4,7 +4,7 @@ resource "random_id" "db_name_suffix" {
 
 resource "google_sql_database_instance" "db_instance" {
   // name = "${var.project_name}-db-${random_id.db_name_suffix.hex}"
-  name   = "${var.project_name}-db-019"
+  name   = "${var.project_name}-db-020"
   region = var.region
 
   depends_on = [google_service_networking_connection.private_vpc_connection]
@@ -21,7 +21,7 @@ resource "google_sql_database_instance" "db_instance" {
     }
   }
 
-/*
+  /*
   // public network settings
   settings {
     tier              = "db-f1-micro"
