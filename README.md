@@ -55,7 +55,7 @@ REACT_APP_API_BASE_URL=<CLOUDFUNCTION-TRIGGER-URL>
 
 ## Domain configuration
 
-- Creat an A record and point it to the external static IP address. See reference GCP documentaion [here](https://cloud.google.com/storage/docs/hosting-static-website#connect-domain)
+- Creat A records for both `<YOUR-DOMAIN>`, and `*.<YOUR-DOMAIN>` and point them to the external static IP address. See reference GCP documentaion [here](https://cloud.google.com/storage/docs/hosting-static-website#connect-domain)
 
 ## Connect to Cloud SQL
 
