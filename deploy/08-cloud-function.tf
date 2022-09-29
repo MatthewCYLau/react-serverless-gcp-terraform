@@ -1,5 +1,5 @@
 resource "google_storage_bucket" "cloud_functions" {
-  name          = "react-serverless-cloud-functions-bucket"
+  name          = "${var.project_name}-cloud-functions"
   force_destroy = true
   location      = "EUROPE-WEST2"
   storage_class = "STANDARD"
