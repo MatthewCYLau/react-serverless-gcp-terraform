@@ -2,7 +2,6 @@
   "name": "react-serverless-gcp-terraform",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://storage.googleapis.com/www.matlau.co.uk",
   "eslintConfig": {
     "extends": [
       "react-app",
