@@ -2,7 +2,7 @@
 
 A reference project to deploy a static React app onto Google Cloud Storage, [Cloud Build](https://cloud.google.com/cloud-build) as the CI/CD tool, and Cloud Functions as serverless back-end, referencing [this](https://cloud.google.com/storage/docs/hosting-static-website-http) GCP documentation
 
-App URL [here](https://matlau.co.uk/)
+App URL here: [`https://matlau.co.uk/`](https://matlau.co.uk/)
 
 ![GCP Architecture](img/gcp-architecture.png)
 

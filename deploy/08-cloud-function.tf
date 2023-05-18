@@ -1,5 +1,9 @@
+resource "random_id" "cloud_function_bucket_suffix" {
+  byte_length = 4
+}
+
 resource "google_storage_bucket" "cloud_functions" {
-  name          = "${var.project_name}-cloud-functions"
+  name          = "${var.project_name}-cloud-function-${random_id.cloud_function_bucket_suffix.hex}"
   force_destroy = true
   location      = "EUROPE-WEST2"
   storage_class = "STANDARD"
