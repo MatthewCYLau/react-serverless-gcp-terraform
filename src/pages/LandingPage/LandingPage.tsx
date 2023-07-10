@@ -17,7 +17,7 @@ const LandingPage: React.FunctionComponent = () => {
       key: "welcome",
       html: (
         <Typography variant="h4" component="h2" paragraph>
-          GCP Serverless To-Do App
+          GCP Serverless To-Do App Blue Berries
         </Typography>
       ),
     },
