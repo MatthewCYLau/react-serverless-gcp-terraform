@@ -1,6 +1,6 @@
 project                       = "open-source-apps-001"
 project_name                  = "react-serverless-gcp"
-bucket_name                   = "www.matlau.co.uk"
+bucket_name                   = "www.gcpserverless.com"
 cloud_source_repo_name        = "github_matthewcylau_react-serverless-gcp-terraform"
 region                        = "europe-west2"
 zone                          = "europe-west2-a"
