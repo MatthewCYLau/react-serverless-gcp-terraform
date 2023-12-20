@@ -18,7 +18,7 @@ resource "google_compute_managed_ssl_certificate" "web" {
   name     = "ssl-certificate"
   project  = var.project
   managed {
-    domains = ["gcpserverless.com", "www.gcpserverless.com"]
+    domains = [var.domain_name, "www.${var.domain_name}"]
   }
 }
 

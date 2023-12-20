@@ -7,8 +7,9 @@ variable "project_name" {
   description = "Project name"
 }
 
-variable "bucket_name" {
-  description = "Name of tatic site storage bucket"
+variable domain_name {
+  type        = string
+  description = "Domain name e.g. example.com"
 }
 
 variable "cloud_source_repo_name" {

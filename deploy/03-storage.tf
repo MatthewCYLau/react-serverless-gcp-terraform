@@ -1,5 +1,5 @@
 resource "google_storage_bucket" "static_site" {
-  name          = var.bucket_name
+  name          = local.bucket_name
   location      = "EUROPE-WEST2"
   storage_class = "STANDARD"
   force_destroy = true

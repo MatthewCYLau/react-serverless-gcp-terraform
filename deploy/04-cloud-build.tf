@@ -9,7 +9,7 @@ resource "google_cloudbuild_trigger" "github_push_trigger" {
   }
 
   substitutions = {
-    _BUCKET_NAME            = var.bucket_name
+    _BUCKET_NAME            = local.bucket_name
     _REACT_APP_API_BASE_URL = "${module.cloud-function["api"].cloud_function_trigger_url}"
   }
 }

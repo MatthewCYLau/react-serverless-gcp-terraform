@@ -12,9 +12,9 @@ resource "google_dns_record_set" "domain" {
   rrdatas      = [google_compute_global_address.external_ip.address]
 }
 
-resource "google_dns_record_set" "www_domain" {
+resource "google_dns_record_set" "subdomain" {
   provider     = google
-  name         = "www.gcpserverless.com."
+  name         = "www.${var.domain_name}."
   type         = "A"
   ttl          = 300
   managed_zone = data.google_dns_managed_zone.gcpserverless.name
