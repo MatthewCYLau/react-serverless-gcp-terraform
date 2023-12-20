@@ -2,13 +2,13 @@
 
 A reference project to deploy a static React app onto Google Cloud Storage, [Cloud Build](https://cloud.google.com/cloud-build) as the CI/CD tool, and Cloud Functions as serverless back-end, referencing [this](https://cloud.google.com/storage/docs/hosting-static-website-http) GCP documentation
 
-App URL here: [`https://matlau.co.uk/`](https://matlau.co.uk/)
+App URL here: [`https://www.gcpserverless.com/`](https://www.gcpserverless.com/)
 
 ![GCP Architecture](img/gcp-architecture.png)
 
 ## Pre-requisites
 
-- You own a domain via [Google Domains](https://domains.google/intl/en-GB/)
+- You own a domain via [Cloud DNS](https://cloud.google.com/dns?hl=en)
 - You have created a project repository on [Cloud Source Repositories](https://cloud.google.com/source-repositories)
 - You have installed [Terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli):
 
@@ -18,7 +18,7 @@ terraform -help # prints Terraform options
 
 ## Domain set-up
 
-- Add the GCP credentials JSON `client_email` as an owner of the domain. See Cloud Storage documentation [here](https://cloud.google.com/storage/docs/domain-name-verification#additional_verified_owners)
+- Verify domain ownership for the domain-named bucket. See Cloud Storage documentation [here](https://cloud.google.com/storage/docs/domain-name-verification#additional_verified_owners)
 
 ## Configurations
 
@@ -55,7 +55,7 @@ REACT_APP_API_BASE_URL=<CLOUDFUNCTION-TRIGGER-URL>
 
 ## Domain configuration
 
-- Creat A records for both `<YOUR-DOMAIN>`, and `*.<YOUR-DOMAIN>` and point them to the external static IP address. See reference GCP documentaion [here](https://cloud.google.com/storage/docs/hosting-static-website#connect-domain)
+- In Cloud DNS, creat A records for both `<YOUR-DOMAIN>`, and `*.<YOUR-DOMAIN>` and point them to the external static IP address. See reference GCP documentaion [here](https://cloud.google.com/storage/docs/hosting-static-website#connect-domain)
 
 ## Connect to Cloud SQL
 
