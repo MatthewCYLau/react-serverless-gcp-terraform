@@ -7,7 +7,7 @@ variable "project_name" {
   description = "Project name"
 }
 
-variable domain_name {
+variable "domain_name" {
   type        = string
   description = "Domain name e.g. example.com"
 }

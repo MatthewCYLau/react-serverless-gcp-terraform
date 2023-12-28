@@ -20,20 +20,10 @@ resource "google_compute_network" "vpc" {
 
 resource "google_compute_subnetwork" "subnet" {
   name                     = "app-subnet"
-  ip_cidr_range            = "10.8.0.0/28"
+  ip_cidr_range            = "10.0.0.0/28"
   region                   = var.region
   network                  = google_compute_network.vpc.id
   private_ip_google_access = true
-
-  secondary_ip_range {
-    range_name    = "pod"
-    ip_cidr_range = "10.0.16.0/20"
-  }
-
-  secondary_ip_range {
-    range_name    = "svc"
-    ip_cidr_range = "10.0.32.0/20"
-  }
 }
 
 resource "google_compute_global_address" "private_ip_address" {
