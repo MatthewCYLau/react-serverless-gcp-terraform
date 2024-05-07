@@ -14,7 +14,7 @@ output "external_ip" {
 }
 
 resource "google_compute_network" "vpc" {
-  name                    = "app-vpc"
+  name                    = "${var.project_name}-vpc"
   auto_create_subnetworks = false
 }
 
