@@ -22,9 +22,11 @@ locals {
 }
 
 resource "google_vpc_access_connector" "cloud_function_connector" {
-  provider     = google-beta
-  name         = "vpc-connector"
-  machine_type = "e2-micro"
+  provider      = google-beta
+  name          = "vpc-connector"
+  machine_type  = "e2-micro"
+  min_instances = 2
+  max_instances = 3
   subnet {
     name = google_compute_subnetwork.subnet.name
   }
