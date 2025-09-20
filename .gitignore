@@ -26,7 +26,6 @@ yarn-error.log*
 .eslintcache
 
 .terraform
-.terraform.lock.hcl
 
 # .tfstate files
 *.tfstate
